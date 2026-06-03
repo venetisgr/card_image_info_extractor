@@ -126,9 +126,12 @@ generate **Pydantic** models (backend) and **Kotlin** data classes (Android).
 | `attributes.rookie` | bool | RC flag |
 | `attributes.autograph` | bool | on-card / sticker auto |
 | `attributes.relic` | bool | memorabilia/patch |
-| `attributes.serial_number` | string? | e.g. `12` |
-| `attributes.serial_limit` | string? | e.g. `99` (the "/99") |
-| `graded.grading_company` | enum? | PSA, BGS, SGC, CGC, TAG, … |
+| `attributes.serial_number` | string? | limited card like `5/30` → this card's number (`5`) |
+| `attributes.serial_limit` | string? | limited card like `5/30` → total population (`30`) |
+| `photo.jersey_colors` | array? | colors of the jersey in the player's picture |
+| `photo.jersey_number` | string? | number on the jersey in the picture (e.g. `23`) |
+| `relic.swatch_colors` | array? | colors of the embedded real-life jersey swatch |
+| `graded.grading_company` | enum? | PSA, BGS (Beckett), SGC, CGC, TAG, … |
 | `graded.grade` | number? | numeric grade (e.g. `10`, `9.5`) |
 | `graded.grade_label` | string? | e.g. `GEM-MT 10` |
 | `graded.subgrades` | object? | `{centering, corners, edges, surface}` (BGS) |
@@ -180,6 +183,22 @@ generate **Pydantic** models (backend) and **Kotlin** data classes (Android).
   "provenance": { "engine": "on_device", "model_version": "android-0.3.1", "timestamp": "2026-06-03T10:01:00Z" }
 }
 ```
+
+### Example — graded relic / serial-numbered (priority fields)
+```json
+{
+  "card_type": "graded",
+  "player_name": "LeBron James",
+  "graded": { "grading_company": "BGS", "grade": 9.5, "cert_number": "0012345678" },
+  "attributes": { "rookie": true, "autograph": true, "relic": true, "serial_number": "5", "serial_limit": "30" },
+  "photo": { "jersey_colors": ["wine", "gold", "white"], "jersey_number": "23" },
+  "relic": { "swatch_colors": ["wine", "white"] }
+}
+```
+
+> Full, schema-valid records (graded, graded-relic, raw) live in
+> [`shared/examples/`](shared/examples/); the contract itself is
+> [`shared/schema/card_info.schema.json`](shared/schema/card_info.schema.json).
 
 ---
 

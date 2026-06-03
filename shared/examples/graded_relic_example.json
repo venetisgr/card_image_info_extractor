@@ -1,0 +1,55 @@
+{
+  "card_type": "graded",
+  "sport": "basketball",
+  "player_name": "LeBron James",
+  "year": "2003-04",
+  "manufacturer": "Upper Deck",
+  "set": "Exquisite Collection",
+  "subset": "Rookie Patch Autograph",
+  "parallel": null,
+  "card_number": "78",
+  "team": "Cleveland Cavaliers",
+  "language": "en",
+  "attributes": {
+    "rookie": true,
+    "autograph": true,
+    "relic": true,
+    "serial_number": "5",
+    "serial_limit": "30"
+  },
+  "photo": {
+    "jersey_colors": ["wine", "gold", "white"],
+    "jersey_number": "23"
+  },
+  "relic": {
+    "swatch_colors": ["wine", "white"]
+  },
+  "graded": {
+    "grading_company": "BGS",
+    "grade": 9.5,
+    "grade_label": "GEM MINT 9.5",
+    "subgrades": {
+      "centering": 9.5,
+      "corners": 9.5,
+      "edges": 9.0,
+      "surface": 9.5
+    },
+    "cert_number": "0012345678",
+    "label_text": "2003-04 EXQUISITE COLLECTION LEBRON JAMES RPA #78 5/30 BGS GEM MINT 9.5"
+  },
+  "per_field_confidence": {
+    "player_name": 0.99,
+    "grade": 1.0,
+    "cert_number": 0.98,
+    "serial_number": 0.95,
+    "serial_limit": 0.95,
+    "relic.swatch_colors": 0.8
+  },
+  "provenance": {
+    "engine": "claude",
+    "model_version": "claude-opus-4-8",
+    "timestamp": "2026-06-03T10:02:00Z",
+    "source_images": ["sha256:front-ghi789", "sha256:back-ghi790"]
+  },
+  "raw_output": null
+}

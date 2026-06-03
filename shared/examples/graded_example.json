@@ -1,0 +1,45 @@
+{
+  "card_type": "graded",
+  "sport": "basketball",
+  "player_name": "Michael Jordan",
+  "year": "1986-87",
+  "manufacturer": "Fleer",
+  "set": "Fleer",
+  "subset": null,
+  "parallel": null,
+  "card_number": "57",
+  "team": "Chicago Bulls",
+  "language": "en",
+  "attributes": {
+    "rookie": true,
+    "autograph": false,
+    "relic": false,
+    "serial_number": null,
+    "serial_limit": null
+  },
+  "photo": {
+    "jersey_colors": ["red", "white", "black"],
+    "jersey_number": "23"
+  },
+  "relic": null,
+  "graded": {
+    "grading_company": "PSA",
+    "grade": 9,
+    "grade_label": "MINT 9",
+    "subgrades": null,
+    "cert_number": "12345678",
+    "label_text": "1986 FLEER MICHAEL JORDAN #57 RC PSA MINT 9"
+  },
+  "per_field_confidence": {
+    "player_name": 0.99,
+    "grade": 1.0,
+    "cert_number": 0.97
+  },
+  "provenance": {
+    "engine": "claude",
+    "model_version": "claude-opus-4-8",
+    "timestamp": "2026-06-03T10:00:00Z",
+    "source_images": ["sha256:front-abc123", "sha256:back-abc124"]
+  },
+  "raw_output": null
+}

@@ -12,18 +12,19 @@
 ---
 
 ## 🔜 In progress
-- [~] **P0-0** Project bootstrap & docs — *the six planning docs exist and are
-  committed* (this is being completed now; see `completed_tasks.md`).
+- [~] 🟡 **P0-4** Seed dataset — collect 100–200 graded+raw images (front+back) and
+  label them. *Needs real card images to proceed.*
 
 ---
 
 ## Phase 0 — Foundations
-- [ ] 🔴 **P0-1** Define `CardInfo` **JSON Schema** in `/shared` — *schema covers all
-  fields in `architecture_components.md` §4 and validates the two examples.*
-- [ ] 🔴 **P0-2** Codegen from schema → **Pydantic** + **Kotlin** types — *generated
-  types compile in `/backend` and `/android`.*
-- [ ] 🔴 **P0-3** Scaffold repo dirs (`backend`, `android`, `shared`, `ml`, `data`,
-  `eval`) with minimal build files — *each subproject builds empty.*
+- [x] 🔴 **P0-1** Define `CardInfo` **JSON Schema** in `/shared` — *done; covers the
+  priority fields (graded?/company/cert, player, `photo` jersey colors+number,
+  `relic.swatch_colors`, serial 5/30) and validates all examples. → completed_tasks.md*
+- [x] 🔴 **P0-2** Codegen from schema → **Pydantic** + **Kotlin** types — *done via
+  `shared/codegen/generate.sh`. → completed_tasks.md*
+- [x] 🔴 **P0-3** Scaffold repo dirs + minimal build files + tests — *done; backend
+  `pytest` green (schema⇄examples⇄model). → completed_tasks.md*
 - [ ] 🟡 **P0-4** **Seed dataset**: collect 100–200 images (graded + raw; baseball,
   basketball, football, hockey, soccer; varied eras/conditions; front+back) —
   *images stored in `/data` with a manifest.*

@@ -1,0 +1,216 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/venetisgr/card_image_info_extractor/shared/schema/card_info.schema.json",
+  "title": "CardInfo",
+  "description": "Canonical structured record for a sports card extracted by either engine (Claude API or on-device). Single source of truth; Pydantic and Kotlin types are generated from this file. NOTE: when card_type is 'graded', the 'graded' object should be present (may contain nulls if unreadable).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["card_type", "attributes", "per_field_confidence", "provenance"],
+  "properties": {
+    "card_type": {
+      "description": "Whether the card is professionally graded/slabbed or raw (loose).",
+      "type": "string",
+      "enum": ["graded", "raw"]
+    },
+    "sport": {
+      "description": "Sport the card belongs to.",
+      "anyOf": [
+        { "type": "string", "enum": ["baseball", "basketball", "football", "hockey", "soccer", "other"] },
+        { "type": "null" }
+      ],
+      "default": null
+    },
+    "player_name": {
+      "description": "Subject/athlete name as printed.",
+      "type": ["string", "null"],
+      "default": null
+    },
+    "year": {
+      "description": "Card year or season, e.g. '2003' or '2003-04'.",
+      "type": ["string", "null"],
+      "default": null
+    },
+    "manufacturer": {
+      "description": "Card maker (Topps, Panini, Upper Deck, Bowman, Fleer, ...), normalized.",
+      "type": ["string", "null"],
+      "default": null
+    },
+    "set": {
+      "description": "Product/set name, normalized.",
+      "type": ["string", "null"],
+      "default": null
+    },
+    "subset": {
+      "description": "Insert/subset name, if any.",
+      "type": ["string", "null"],
+      "default": null
+    },
+    "parallel": {
+      "description": "Parallel/variation, e.g. 'Silver Prizm'.",
+      "type": ["string", "null"],
+      "default": null
+    },
+    "card_number": {
+      "description": "Card number exactly as printed, e.g. 'RC-12' or '#250'.",
+      "type": ["string", "null"],
+      "default": null
+    },
+    "team": {
+      "description": "Team/franchise, if present.",
+      "type": ["string", "null"],
+      "default": null
+    },
+    "language": {
+      "description": "ISO language code if detectable.",
+      "type": ["string", "null"],
+      "default": null
+    },
+    "attributes": {
+      "$ref": "#/$defs/Attributes"
+    },
+    "photo": {
+      "description": "Visual details of the player's picture printed on the card.",
+      "anyOf": [ { "$ref": "#/$defs/Photo" }, { "type": "null" } ],
+      "default": null
+    },
+    "relic": {
+      "description": "Embedded memorabilia/relic details; present for relic ('jersey piece') cards.",
+      "anyOf": [ { "$ref": "#/$defs/Relic" }, { "type": "null" } ],
+      "default": null
+    },
+    "graded": {
+      "description": "Grading details; present when card_type is 'graded'.",
+      "anyOf": [
+        { "$ref": "#/$defs/GradedInfo" },
+        { "type": "null" }
+      ],
+      "default": null
+    },
+    "per_field_confidence": {
+      "description": "Confidence in [0,1] for individual fields, keyed by field name.",
+      "type": "object",
+      "additionalProperties": { "type": "number", "minimum": 0, "maximum": 1 },
+      "default": {}
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "raw_output": {
+      "description": "Raw engine output (OCR text or model JSON) for debugging.",
+      "anyOf": [
+        { "type": "object", "additionalProperties": true },
+        { "type": "null" }
+      ],
+      "default": null
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "card_type": { "const": "graded" } },
+        "required": ["card_type"]
+      },
+      "then": { "required": ["graded"] }
+    }
+  ],
+  "$defs": {
+    "Photo": {
+      "title": "Photo",
+      "description": "Visual details of the player's picture printed on the card.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "jersey_colors": {
+          "description": "Colors of the jersey the player is wearing in the card's picture, if visible (e.g. ['red','black','white']).",
+          "anyOf": [ { "type": "array", "items": { "type": "string" } }, { "type": "null" } ],
+          "default": null
+        },
+        "jersey_number": {
+          "description": "Number shown on the jersey in the card's picture, if visible (as printed, e.g. '23').",
+          "type": ["string", "null"],
+          "default": null
+        }
+      }
+    },
+    "Relic": {
+      "title": "Relic",
+      "description": "Details of an embedded memorabilia/relic piece (e.g. a real jersey swatch) in the card/slab.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "swatch_colors": {
+          "description": "Colors of the embedded real-life jersey/memorabilia piece, if present (e.g. ['blue','white']).",
+          "anyOf": [ { "type": "array", "items": { "type": "string" } }, { "type": "null" } ],
+          "default": null
+        }
+      }
+    },
+    "Attributes": {
+      "title": "Attributes",
+      "description": "Card attribute flags and serial-numbering info.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rookie": { "description": "Rookie card (RC).", "type": "boolean", "default": false },
+        "autograph": { "description": "Contains an autograph.", "type": "boolean", "default": false },
+        "relic": { "description": "Contains a relic/memorabilia/patch.", "type": "boolean", "default": false },
+        "serial_number": { "description": "For a serial-numbered (limited) card such as '5/30', this card's own number (the 5).", "type": ["string", "null"], "default": null },
+        "serial_limit": { "description": "For a serial-numbered (limited) card such as '5/30', the total print run/population (the 30).", "type": ["string", "null"], "default": null }
+      }
+    },
+    "Subgrades": {
+      "title": "Subgrades",
+      "description": "Per-aspect subgrades (e.g. BGS).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "centering": { "type": ["number", "null"], "minimum": 0, "maximum": 10, "default": null },
+        "corners": { "type": ["number", "null"], "minimum": 0, "maximum": 10, "default": null },
+        "edges": { "type": ["number", "null"], "minimum": 0, "maximum": 10, "default": null },
+        "surface": { "type": ["number", "null"], "minimum": 0, "maximum": 10, "default": null }
+      }
+    },
+    "GradedInfo": {
+      "title": "GradedInfo",
+      "description": "Details read from a graded slab label and/or verified via a cert API.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "grading_company": {
+          "description": "Grading company. BGS = Beckett Grading Services.",
+          "anyOf": [
+            { "type": "string", "enum": ["PSA", "BGS", "SGC", "CGC", "TAG", "other"] },
+            { "type": "null" }
+          ],
+          "default": null
+        },
+        "grade": { "description": "Numeric grade, e.g. 10 or 9.5.", "type": ["number", "null"], "minimum": 0, "maximum": 10, "default": null },
+        "grade_label": { "description": "Grade label as printed, e.g. 'GEM-MT 10'.", "type": ["string", "null"], "default": null },
+        "subgrades": {
+          "anyOf": [ { "$ref": "#/$defs/Subgrades" }, { "type": "null" } ],
+          "default": null
+        },
+        "cert_number": { "description": "Certification/serial number on the slab.", "type": ["string", "null"], "default": null },
+        "label_text": { "description": "Full OCR of the label, for reference.", "type": ["string", "null"], "default": null }
+      }
+    },
+    "Provenance": {
+      "title": "Provenance",
+      "description": "Where/how this record was produced.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["engine", "model_version", "timestamp"],
+      "properties": {
+        "engine": { "description": "Which engine produced this.", "type": "string", "enum": ["claude", "on_device"] },
+        "model_version": { "description": "Model id (e.g. 'claude-opus-4-8') or app build.", "type": "string" },
+        "timestamp": { "description": "ISO-8601 timestamp.", "type": "string", "format": "date-time" },
+        "source_images": {
+          "description": "References/hashes of the input image(s).",
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        }
+      }
+    }
+  }
+}

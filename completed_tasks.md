@@ -9,6 +9,9 @@ and a short note/links.
 
 | Date | ID | Task | Notes |
 |---|---|---|---|
+| 2026-06-03 | P0-1 | `CardInfo` JSON Schema | `shared/schema/card_info.schema.json` (draft 2020-12). Priority fields per spec: graded?/company/cert, player, `photo.jersey_colors`+`jersey_number`, `relic.swatch_colors`, serial 5/30. Validated + negative test. |
+| 2026-06-03 | P0-2 | Codegen → Pydantic + Kotlin | Generated `backend/app/models/card_info.py` (Pydantic v2) and `android/.../CardInfo.kt` (kotlinx) from the schema via `shared/codegen/generate.sh`. |
+| 2026-06-03 | P0-3 | Repo scaffold + tests | Dirs shared/backend/android/ml/data/eval, READMEs, `.gitignore`, root README. Backend `pytest` (10 tests) green: schema⇄examples⇄model in sync. |
 | 2026-06-03 | P0-0e | Resources doc | `resources.md`: people, accounts/APIs, libraries, data, hardware, infra, cost model — grounded with source links. |
 | 2026-06-03 | P0-0d | Scratchpad created | `scratchpad.md`: decisions log, ideas-to-try, open questions, "what didn't work" template. |
 | 2026-06-03 | P0-0c | Task tracking created | `pending_tasks.md` (backlog by phase, P0–P1 detailed) + this `completed_tasks.md`. |

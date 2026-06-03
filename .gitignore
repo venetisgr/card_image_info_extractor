@@ -1,0 +1,43 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+
+# --- Node (quicktype / tooling) ---
+node_modules/
+npm-debug.log*
+
+# --- Android / Gradle ---
+.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.idea/
+*.iml
+*.apk
+*.aab
+*.keystore
+
+# --- Secrets / env ---
+.env
+.env.*
+*.local
+
+# --- Data artifacts (keep READMEs + small reference tables; ignore large/binary) ---
+data/images/
+data/raw/
+*.tflite
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
