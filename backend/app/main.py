@@ -11,8 +11,10 @@ from fastapi import Depends, FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.responses import JSONResponse
 
 from app.config import MAX_UPLOAD_BYTES, load_dotenv, resolve_model
+from app.services.enrich import enrich_card
 from app.services.extractor import CardExtractor, ExtractionError
 from app.services.images import ImageError, preprocess_image
+from app.services.psa import PSAClient, PSAError
 
 logger = logging.getLogger("card_extractor")
 
@@ -24,6 +26,7 @@ app = FastAPI(
 )
 
 _extractor: CardExtractor | None = None
+_psa_client: PSAClient | None = None
 
 
 def get_extractor() -> CardExtractor:
@@ -31,6 +34,13 @@ def get_extractor() -> CardExtractor:
     if _extractor is None:
         _extractor = CardExtractor()
     return _extractor
+
+
+def get_psa_client() -> PSAClient:
+    global _psa_client
+    if _psa_client is None:
+        _psa_client = PSAClient()
+    return _psa_client
 
 
 async def _read_image(upload: UploadFile, name: str):
@@ -53,7 +63,9 @@ async def extract(
     front: UploadFile = File(..., description="Photo of the card front (required)"),
     back: UploadFile | None = File(None, description="Photo of the card back (optional)"),
     model: str | None = Form(None, description="Model tier alias (opus/sonnet/haiku) or model id"),
+    enrich: bool = Form(True, description="Verify graded PSA cards via the PSA public API"),
     extractor: CardExtractor = Depends(get_extractor),
+    psa_client: PSAClient = Depends(get_psa_client),
 ) -> JSONResponse:
     front_img = await _read_image(front, "front")
     back_img = await _read_image(back, "back") if back is not None else None
@@ -72,5 +84,25 @@ async def extract(
     except ExtractionError as exc:
         raise HTTPException(502, f"extraction failed: {exc}") from exc
 
-    logger.info("extracted card_type=%s usage=%s", result.card.card_type, result.usage.as_dict())
-    return JSONResponse(result.card.model_dump(mode="json"))
+    card = result.card
+    if enrich:
+        card, outcome = enrich_card(card, psa_client)
+        if outcome.attempted:
+            logger.info("psa enrichment: %s (changed=%s)", outcome.note, outcome.changed_fields)
+
+    logger.info("extracted card_type=%s usage=%s", card.card_type, result.usage.as_dict())
+    return JSONResponse(card.model_dump(mode="json"))
+
+
+@app.get("/verify/psa/{cert_number}")
+def verify_psa(cert_number: str, psa_client: PSAClient = Depends(get_psa_client)) -> JSONResponse:
+    """Standalone cert lookup: returns PSA's record for a slab."""
+    if not psa_client.available:
+        raise HTTPException(503, "PSA_API_TOKEN not configured on the server")
+    try:
+        record = psa_client.get_cert(cert_number)
+    except PSAError as exc:
+        raise HTTPException(502, str(exc)) from exc
+    if record is None:
+        raise HTTPException(404, f"PSA has no record for cert {cert_number}")
+    return JSONResponse(record)

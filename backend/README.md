@@ -5,9 +5,12 @@ phases, shared **enrichment** (PSA cert lookup, checklist matching) and
 **normalization**. The Android app also calls this service for enrichment and
 Claude fallback.
 
-> Status: **Phase 1 complete.** `POST /extract` performs live Claude extraction
-> (front + back → validated `CardInfo`), with prompt caching, model tiering, and
-> a corrective validation retry. Enrichment (Phase 2) is next.
+> Status: **Phase 1 complete; Phase 2 (PSA verification) wired.** `POST /extract`
+> performs live Claude extraction (front + back → validated `CardInfo`) with
+> prompt caching, model tiering, and a corrective validation retry — then, for
+> graded PSA cards, verifies the cert against the PSA public API and overrides
+> extracted fields with the authoritative record. Add `PSA_API_TOKEN=...` to
+> `.env` (token from psacard.com/publicapi) to enable live verification.
 
 ## Layout
 ```
@@ -58,7 +61,16 @@ python -m app.cli front.jpg back.jpg --model opus --out card.json
 - **Model tiering**: `model=opus|sonnet|haiku` (→ `claude-opus-4-8`,
   `claude-sonnet-5`, `claude-haiku-4-5`) or any full model id. Default: opus.
 
-## Planned (Phase 2+)
-- Enrichment: PSA public API (graded cert verification), checklist fuzzy-match
-  (raw), brand/set normalization tables; response caching for external APIs.
+## PSA verification (Phase 2)
+- Graded + `grading_company=PSA` + readable cert → `GET /cert/GetByCertNumber`
+  on the PSA public API (responses cached on disk; free tier ~100 calls/day).
+- Verified fields (year, brand/set, player, card #, sport, grade) override the
+  extraction with confidence 1.0; the PSA record is kept in
+  `raw_output.verification` for audit. Failures never break an extraction.
+- Endpoints: automatic inside `POST /extract` (send `enrich=false` to skip);
+  standalone `GET /verify/psa/{cert}`; CLI flag `--no-enrich`.
+
+## Planned (Phase 2 cont. / Phase 3)
+- Checklist fuzzy-match for raw cards (TCDB/SportsCardsPro import) + brand/set
+  normalization tables; BGS/CGC/SGC verifier adapters.
 - Persistence (Postgres) + request logging/metrics.

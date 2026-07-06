@@ -30,6 +30,7 @@ android/.idea/
 .env
 .env.*
 *.local
+backend/.cache/
 
 # --- Data artifacts ---
 # data/images/seed/ IS committed (small curated seed set, keep photos ~<5MB each);

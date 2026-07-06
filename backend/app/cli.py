@@ -11,8 +11,10 @@ import time
 from pathlib import Path
 
 from app.config import MODEL_PRICES_PER_MTOK, load_dotenv, resolve_model
+from app.services.enrich import enrich_card
 from app.services.extractor import CardExtractor
 from app.services.images import preprocess_image
+from app.services.psa import PSAClient
 
 
 def _estimate_cost(usage) -> float | None:
@@ -34,6 +36,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("back", type=Path, nargs="?", default=None, help="photo of the back")
     parser.add_argument("--model", default=None, help="opus | sonnet | haiku | full model id")
     parser.add_argument("--out", type=Path, default=None, help="write the CardInfo JSON here")
+    parser.add_argument(
+        "--no-enrich", action="store_true", help="skip PSA cert verification for graded PSA cards"
+    )
     args = parser.parse_args(argv)
 
     load_dotenv()
@@ -44,6 +49,14 @@ def main(argv: list[str] | None = None) -> int:
     extractor = CardExtractor()
     start = time.perf_counter()
     result = extractor.extract(front, back, model=model)
+    if not args.no_enrich:
+        card, outcome = enrich_card(result.card, PSAClient())
+        result.card = card
+        if outcome.note:
+            print(f"[psa] {outcome.note}"
+                  + (f" (updated: {', '.join(outcome.changed_fields)})"
+                     if outcome.changed_fields else ""),
+                  file=sys.stderr)
     elapsed = time.perf_counter() - start
 
     payload = json.dumps(result.card.model_dump(mode="json"), indent=2)

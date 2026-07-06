@@ -24,6 +24,14 @@ MODEL_ALIASES = {
 DEFAULT_MODEL = MODEL_ALIASES["opus"]
 
 MAX_UPLOAD_BYTES = 20 * 1024 * 1024  # per image
+
+# PSA public API (graded-card cert verification, roadmap P2-1/P2-2).
+# Token: generate at https://www.psacard.com/publicapi and put
+# PSA_API_TOKEN=... into backend/.env. Free tier is ~100 calls/day, hence the
+# on-disk response cache.
+PSA_API_BASE = "https://api.psacard.com/publicapi"
+PSA_TOKEN_ENV = "PSA_API_TOKEN"
+PSA_CACHE_DIR = BACKEND_DIR / ".cache" / "psa"
 MAX_IMAGE_LONG_EDGE = 2576  # Claude vision native-resolution ceiling
 JPEG_QUALITY = 90
 MAX_OUTPUT_TOKENS = 8192

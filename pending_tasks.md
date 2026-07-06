@@ -62,9 +62,15 @@
   `data/images/seed/README.md`), then run `eval/compare.py` per card.*
 
 ## Phase 2 — Enrichment & verification
-- [ ] 🔴 **P2-1** PSA **public API** client (OAuth2 + caching) — *cert # → fields.*
-- [ ] 🔴 **P2-2** Wire graded path: cert # → lookup → reconcile/override — *graded
-  samples become verified.*
+- [x] 🔴 **P2-1** PSA **public API** client — *done: bearer-token client with
+  on-disk response cache (free tier ~100/day), clean error taxonomy.*
+- [x] 🔴 **P2-2** Wire graded path: cert # → lookup → reconcile/override — *done:
+  verified-beats-extracted policy, confidence 1.0 on verified fields, PSA record
+  kept in `raw_output.verification`; auto-runs in `/extract` (opt-out) + CLI +
+  standalone `GET /verify/psa/{cert}`. Mock-tested (18 tests).*
+- [~] 🔴 **P2-2b** LIVE PSA verification — *blocked on a token: generate at
+  psacard.com/publicapi and add `PSA_API_TOKEN=...` to `backend/.env`; then the
+  owner's real certs (26987167, 111281730, 111281750, 20505941) are test cases.*
 - [ ] 🟡 **P2-3** Third-party verifier adapters (BGS/CGC/SGC/TAG) — *at least one
   non-PSA company resolved.*
 - [ ] 🔴 **P2-4** Import **checklist DB** (TCDB / SportsCardsPro) into Postgres —
