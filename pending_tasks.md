@@ -73,10 +73,10 @@
   owner's real certs (26987167, 111281730, 111281750, 20505941) are test cases.*
 - [ ] 🟡 **P2-3** Third-party verifier adapters (BGS/CGC/SGC/TAG) — *at least one
   non-PSA company resolved.*
-- [ ] 🔴 **P2-4** Import **checklist DB** (TCDB / SportsCardsPro) into Postgres —
-  *queryable by player/year/brand/number.*
-- [ ] 🟡 **P2-5** Raw fuzzy-match + fill — *measurable fill-rate improvement on raw
-  samples.*
+- [ ] ⏸️ **P2-4** Import **checklist DB** (TCDB / SportsCardsPro) — *ON HOLD per
+  user (2026-07-06) — REMIND USER LATER before starting.*
+- [ ] ⏸️ **P2-5** Raw fuzzy-match + fill — *ON HOLD per user (2026-07-06),
+  together with P2-4 — REMIND USER LATER.*
 - [ ] 🟡 **P2-6** Brand/set **normalization tables** — *aliases canonicalized.*
 
 ## Phase 3 — On-device baseline (Android)
