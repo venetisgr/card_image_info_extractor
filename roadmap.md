@@ -1,7 +1,7 @@
 # Roadmap
 
 **Project:** Sports Card Image Information Extractor
-**Last updated:** 2026-06-03
+**Last updated:** 2026-07-06
 **Companion docs:** `architecture_components.md` (the "what"), `pending_tasks.md`
 (the "now"), `scratchpad.md` (the "why / what we tried").
 
@@ -54,6 +54,11 @@ green on empty projects.
   edge) → Claude vision with **structured output** (tool/JSON-schema) → validate →
   return `CardInfo`.
 - **Prompt caching** of the static system prompt + schema + few-shot examples.
+- Prompt encodes the **field spec + extraction hints**: the placeholder template
+  (`shared/templates/card_info_placeholder.json`), positional priors (year/brand/
+  set/subset at the bottom of the front + on the graded label), card#-vs-serial
+  disambiguation, jersey-number candidates when unsure, per-piece memorabilia
+  analysis (fabric/colors/logo/letters), autograph ink color.
 - **Model tiering** flag (Opus/Sonnet/Haiku); default per-difficulty.
 - Accept **front + back**; one corrective retry on schema-validation failure.
 - A thin **CLI / notebook** wrapper for quick local runs.
@@ -75,7 +80,7 @@ against schema; basic latency/cost logged.
   third-party verifier adapters (TCGAPIs/CardGrade) for BGS/CGC/SGC/TAG.
 - **Raw:** fuzzy-match (player + year + brand + number) against a **checklist DB**
   (TCDB / SportsCardsPro import) to canonicalize set/number and fill gaps.
-- **Normalization tables** for manufacturer/set aliases; grade-label normalization.
+- **Normalization tables** for brand/set aliases; grade-label normalization.
 - **Caching** for all external calls (respect PSA's ~100/day free limit).
 
 **Components touched:** `/backend` (enrichment, reference DB), Postgres.

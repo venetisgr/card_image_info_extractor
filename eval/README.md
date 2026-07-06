@@ -13,5 +13,7 @@ Measures and compares both engines (Claude vs on-device) on a labeled test set.
 - Regression check wired into CI.
 
 ## Metrics of interest
-Exact-match and fuzzy-match per field (player, set, card #, grade, cert #, serial
-#/limit, jersey colors/number, relic swatch colors), plus end-to-end record accuracy.
+Exact-match and fuzzy-match per field (player, brand, set, card #, grade, cert #,
+serial #/limit + jersey-number match, jersey colors/number + candidates, autograph
+presence + ink color, memorabilia pieces: type/fabric/colors/logo/letters), plus
+end-to-end record accuracy.

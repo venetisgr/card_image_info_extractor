@@ -20,7 +20,7 @@ class CardType(StrEnum):
 
 class Sport(StrEnum):
     """
-    Sport the card belongs to.
+    Sport the card belongs to (football = American football).
     """
 
     baseball = 'baseball'
@@ -29,6 +29,32 @@ class Sport(StrEnum):
     hockey = 'hockey'
     soccer = 'soccer'
     other = 'other'
+
+
+class Attributes(BaseModel):
+    """
+    Card attribute flags and serial-numbering info.
+    """
+
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    rookie: bool | None = False
+    """
+    Rookie card (RC).
+    """
+    serial_number: str | None = None
+    """
+    For a serial-numbered (limited) card such as '07/99', this copy's own number (the 07). Shows which copy this is out of the print run — NOT the card's number within the set.
+    """
+    serial_limit: str | None = None
+    """
+    For a serial-numbered (limited) card such as '07/99', the total print run / population (the 99).
+    """
+    serial_matches_jersey_number: bool | None = None
+    """
+    True when the copy's serial number equals the player's jersey number (e.g. 07/99 for a player wearing #7) — such 'jersey-numbered' copies are rarer/more valuable. Null if unknown.
+    """
 
 
 class Photo(BaseModel):
@@ -45,51 +71,102 @@ class Photo(BaseModel):
     """
     jersey_number: str | None = None
     """
-    Number shown on the jersey in the card's picture, if visible (as printed, e.g. '23').
+    Best guess for the number on the jersey in the card's picture, if visible (as printed, e.g. '23').
+    """
+    jersey_number_candidates: list[str] | None = None
+    """
+    If the jersey number is uncertain (partially visible/occluded), all plausible candidates, best first (e.g. ['8','3']). Null/empty when jersey_number is confident or not visible.
     """
 
 
-class Relic(BaseModel):
+class Autograph(BaseModel):
     """
-    Details of an embedded memorabilia/relic piece (e.g. a real jersey swatch) in the card/slab.
-    """
-
-    model_config = ConfigDict(
-        extra='forbid',
-    )
-    swatch_colors: list[str] | None = None
-    """
-    Colors of the embedded real-life jersey/memorabilia piece, if present (e.g. ['blue','white']).
-    """
-
-
-class Attributes(BaseModel):
-    """
-    Card attribute flags and serial-numbering info.
+    Autograph/signature details.
     """
 
     model_config = ConfigDict(
         extra='forbid',
     )
-    rookie: bool | None = False
+    present: bool | None = None
     """
-    Rookie card (RC).
+    Does the card contain an autograph? Null if unknown.
     """
-    autograph: bool | None = False
+    ink_color: str | None = None
     """
-    Contains an autograph.
+    Color of the signature ink (e.g. 'black', 'blue', 'gold', 'silver'). Black is the standard; any other color is rarer/more valuable.
     """
-    relic: bool | None = False
+
+
+class PieceType(StrEnum):
     """
-    Contains a relic/memorabilia/patch.
+    Kind of embedded memorabilia piece.
     """
-    serial_number: str | None = None
+
+    patch = 'patch'
+    jersey = 'jersey'
+    ball = 'ball'
+    floor = 'floor'
+    shoe = 'shoe'
+    other = 'other'
+
+
+class MemorabiliaPiece(BaseModel):
     """
-    For a serial-numbered (limited) card such as '5/30', this card's own number (the 5).
+    One embedded memorabilia piece. A card can contain several.
     """
-    serial_limit: str | None = None
+
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    type: PieceType | None = None
     """
-    For a serial-numbered (limited) card such as '5/30', the total print run/population (the 30).
+    Kind of piece: patch (multi-color jersey patch), jersey (plain jersey swatch), ball, floor, shoe, or other.
+    """
+    is_fabric: bool | None = None
+    """
+    Is it an actual piece of fabric/material (true) vs a printed/manufactured facsimile (false)? Null if unclear.
+    """
+    colors: list[str] | None = None
+    """
+    Distinct colors visible in the piece (e.g. ['wine','white','gold']).
+    """
+    unique_color_count: Annotated[int | None, Field(ge=0)] = None
+    """
+    Number of unique colors in the piece (more colors usually = rarer patch).
+    """
+    contains_team_logo_part: bool | None = None
+    """
+    Does the piece contain part of the team logo? Null if unclear.
+    """
+    contains_player_name_part: bool | None = None
+    """
+    Does the piece contain part of the player's name (nameplate letters)? Null if unclear.
+    """
+    contains_team_name_part: bool | None = None
+    """
+    Does the piece contain part of the team name lettering? Null if unclear.
+    """
+    letters_visible: str | None = None
+    """
+    Any letters/characters visible in the piece, as read (e.g. 'AME'). Null if none.
+    """
+
+
+class Memorabilia(BaseModel):
+    """
+    Embedded memorabilia in the card/slab. 'pieces' lists each embedded piece (can be more than one).
+    """
+
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    present: bool | None = None
+    """
+    Does the card contain memorabilia? Null if unknown.
+    """
+    pieces: Annotated[list[MemorabiliaPiece] | None, Field(validate_default=True)] = []
+    """
+    Each embedded piece, analyzed individually.
     """
 
 
@@ -140,6 +217,10 @@ class GradedInfo(BaseModel):
     """
     Grade label as printed, e.g. 'GEM-MT 10'.
     """
+    description: str | None = None
+    """
+    The descriptive information line(s) from the graded label (year/brand/set/player/card# as the grader printed them).
+    """
     subgrades: Subgrades | None = None
     cert_number: str | None = None
     """
@@ -147,7 +228,7 @@ class GradedInfo(BaseModel):
     """
     label_text: str | None = None
     """
-    Full OCR of the label, for reference.
+    Full raw OCR of the label, for reference.
     """
 
 
@@ -182,13 +263,13 @@ class Provenance(BaseModel):
     """
     source_images: list[str] | None = []
     """
-    References/hashes of the input image(s).
+    References/hashes of the input image(s) — front and back.
     """
 
 
 class CardInfo(BaseModel):
     """
-    Canonical structured record for a sports card extracted by either engine (Claude API or on-device). Single source of truth; Pydantic and Kotlin types are generated from this file. NOTE: when card_type is 'graded', the 'graded' object should be present (may contain nulls if unreadable).
+    Canonical structured record for a sports card extracted by either engine (Claude API or on-device). Inputs are BOTH sides of the card (front + back). Single source of truth; Pydantic and Kotlin types are generated from this file. Extraction hint: year, brand, set and subset are most often printed at the bottom of the card front, and on the label if graded. NOTE: when card_type is 'graded', the 'graded' object should be present (may contain nulls if unreadable).
     """
 
     model_config = ConfigDict(
@@ -200,7 +281,7 @@ class CardInfo(BaseModel):
     """
     sport: Sport | None = None
     """
-    Sport the card belongs to.
+    Sport the card belongs to (football = American football).
     """
     player_name: str | None = None
     """
@@ -208,19 +289,19 @@ class CardInfo(BaseModel):
     """
     year: str | None = None
     """
-    Card year or season, e.g. '2003' or '2003-04'.
+    Card year or season, e.g. '2003' or '2003-04'. Often printed at the bottom of the card and on the graded label.
     """
-    manufacturer: str | None = None
+    brand: str | None = None
     """
-    Card maker (Topps, Panini, Upper Deck, Bowman, Fleer, ...), normalized.
+    Card brand/maker (Topps, Panini, Upper Deck, Bowman, Fleer, ...), normalized. Often printed at the bottom of the card and on the graded label.
     """
     set: str | None = None
     """
-    Product/set name, normalized.
+    Product/set name, normalized. Often printed at the bottom of the card and on the graded label.
     """
     subset: str | None = None
     """
-    Insert/subset name, if any.
+    Insert/subset name, if any. Often printed at the bottom of the card and on the graded label.
     """
     parallel: str | None = None
     """
@@ -228,11 +309,11 @@ class CardInfo(BaseModel):
     """
     card_number: str | None = None
     """
-    Card number exactly as printed, e.g. 'RC-12' or '#250'.
+    The card's number WITHIN the set, as printed (e.g. '#250', 'RC-12'). NOT the serial/print-run numbering like 5/30 — that goes in attributes.serial_number/serial_limit.
     """
     team: str | None = None
     """
-    Team/franchise, if present.
+    Player's team/franchise name, if present.
     """
     language: str | None = None
     """
@@ -243,9 +324,13 @@ class CardInfo(BaseModel):
     """
     Visual details of the player's picture printed on the card.
     """
-    relic: Relic | None = None
+    autograph: Autograph | None = None
     """
-    Embedded memorabilia/relic details; present for relic ('jersey piece') cards.
+    Autograph/signature details.
+    """
+    memorabilia: Memorabilia | None = None
+    """
+    Embedded memorabilia details (patch/ball/floor/jersey/shoe pieces). There can be more than one piece in a card.
     """
     graded: GradedInfo | None = None
     """
@@ -253,7 +338,7 @@ class CardInfo(BaseModel):
     """
     per_field_confidence: dict[str, float]
     """
-    Confidence in [0,1] for individual fields, keyed by field name.
+    Confidence in [0,1] for individual fields, keyed by field name (dot-paths allowed, e.g. 'autograph.ink_color').
     """
     provenance: Provenance
     raw_output: dict[str, Any] | None = None

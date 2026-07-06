@@ -15,10 +15,30 @@ each section. Be honest and specific here; this is the project's memory.
 | 2026-06-03 | **Support graded + raw from v1** | User wants both; architecture routes per type. |
 | 2026-06-03 | **One shared `CardInfo` contract** for both engines | Interchangeability, single eval harness, enables fallback. |
 | 2026-06-03 | **Cert lookup is the graded shortcut** | PSA public API gives authoritative fields from the cert # → near-perfect graded extraction. |
+| 2026-07-06 | **Schema v2 per detailed field spec** | Renamed `manufacturer`→`brand` (user vocabulary). Added `graded.description`, `autograph.{present,ink_color}`, `memorabilia.pieces[]` (per-piece analysis), `photo.jersey_number_candidates`, `attributes.serial_matches_jersey_number`. |
+| 2026-07-06 | **`card_number` ≠ serial numbering** | `card_number` = position within the set; `attributes.serial_number/limit` = the 07/99 print-run copy number. Kept as separate fields + spelled out in all descriptions to avoid model confusion. |
+| 2026-07-06 | **Memorabilia is an array of pieces** | A card can embed several pieces (patch + jersey + ball…). Each piece analyzed independently: type, real fabric?, colors + unique count, team-logo part, player-name/team-name letter parts, letters read. |
+| 2026-07-06 | **Uncertainty policy for jersey number** | Best guess in `photo.jersey_number`; when unsure return ALL plausible readings in `jersey_number_candidates` (best first) instead of forcing one. May generalize to other fields later. |
+
+### Interpretations to confirm with user (recorded, not blocking)
+- "does it contain part of the team logo, player name, player team name" (patch
+  context) → modeled as per-piece booleans `contains_team_logo_part`,
+  `contains_player_name_part`, `contains_team_name_part` + `letters_visible` for
+  the actual characters. Top-level `player_name`/`team` cover the card itself.
+- "description (information from graded label)" → `graded.description` = the
+  descriptive line(s); `graded.label_text` keeps the full raw label OCR.
+- Signature ink: stored as `ink_color` string; "black = standard, other = rare"
+  lives in field docs — rarity scoring itself belongs to a later enrichment phase.
 
 ---
 
 ## Ideas to try
+- **Positional priors in prompt + parsers.** Year/brand/set/subset are usually at
+  the bottom of the card front and on the graded label — tell Claude to look there
+  first, and crop those regions for on-device OCR.
+- **Rarity signals as derived enrichment.** Non-black ink, serial==jersey number,
+  multi-color patches, logo/letter patches → compute a "rarity notes" summary from
+  the extracted fields in the backend (not in the vision model).
 - **Slab barcode → instant cert #.** Many slabs have a barcode/QR encoding the cert.
   ML Kit Barcode is trivial and far more reliable than OCR-ing the number. Try first.
 - **Claude-as-labeler (distillation).** Use Engine A to auto-label captured images →

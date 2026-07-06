@@ -45,11 +45,49 @@ def test_priority_fields_present_on_relic_example():
     assert obj.card_type.value == "graded"
     assert obj.graded and obj.graded.grading_company is not None
     assert obj.graded.cert_number
+    assert obj.graded.description
     assert obj.player_name
+    assert obj.sport and obj.year and obj.brand and obj.set and obj.subset
+    assert obj.card_number  # number within the set
     assert obj.photo and obj.photo.jersey_colors and obj.photo.jersey_number
-    assert obj.relic and obj.relic.swatch_colors
-    assert obj.attributes.serial_number == "5"
-    assert obj.attributes.serial_limit == "30"
+    # autograph yes/no + ink color (non-black = rarer)
+    assert obj.autograph and obj.autograph.present is True
+    assert obj.autograph.ink_color == "blue"
+    # memorabilia: multiple pieces, each analyzed (fabric?, colors, logo/letters)
+    assert obj.memorabilia and obj.memorabilia.present is True
+    assert obj.memorabilia.pieces and len(obj.memorabilia.pieces) == 2
+    patch = obj.memorabilia.pieces[0]
+    assert patch.type.value == "patch"
+    assert patch.is_fabric is True
+    assert patch.unique_color_count == 3
+    assert patch.contains_team_logo_part is True
+    letters_piece = obj.memorabilia.pieces[1]
+    assert letters_piece.contains_player_name_part is True
+    assert letters_piece.letters_visible == "AME"
+    # serial numbering (copy 23 of 99), matching the jersey number -> rarer
+    assert obj.attributes.serial_number == "23"
+    assert obj.attributes.serial_limit == "99"
+    assert obj.attributes.serial_matches_jersey_number is True
+
+
+def test_jersey_number_candidates_on_raw_example():
+    """When the jersey number is uncertain, candidates may be returned."""
+    obj = CardInfo.model_validate_json(
+        (REPO / "shared/examples/raw_example.json").read_text()
+    )
+    assert obj.photo is not None
+    assert obj.photo.jersey_number is None
+    assert obj.photo.jersey_number_candidates == ["24", "21"]
+
+
+def test_placeholder_template_covers_schema_fields():
+    """The human/prompt-facing placeholder must list every top-level schema field."""
+    placeholder = json.loads(
+        (REPO / "shared/templates/card_info_placeholder.json").read_text()
+    )
+    placeholder_keys = set(placeholder) - {"_note"}
+    schema_keys = set(SCHEMA["properties"])
+    assert placeholder_keys == schema_keys
 
 
 def test_graded_card_requires_graded_block():

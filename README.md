@@ -9,22 +9,30 @@ raw (ungraded) — via two interchangeable engines that emit the same JSON contr
 Both faces of the card (**front + back**) are used as input.
 
 ## What we extract (priority fields)
-Captured by the canonical [`CardInfo`](shared/schema/card_info.schema.json) schema:
+Captured by the canonical [`CardInfo`](shared/schema/card_info.schema.json) schema
+(see also the human-readable
+[placeholder template](shared/templates/card_info_placeholder.json)):
 
 | Want | Field |
 |---|---|
 | Was it graded? | `card_type` (`graded` / `raw`) |
 | Grading company (PSA, Beckett/BGS, …) | `graded.grading_company` |
 | Certificate id | `graded.cert_number` |
+| Description printed on the graded label | `graded.description` |
+| Sport / year / brand / set / subset | `sport`, `year`, `brand`, `set`, `subset` |
 | Player name | `player_name` |
+| Card number within the set | `card_number` |
+| Autograph yes/no + ink color (black standard, other = rarer) | `autograph.present`, `autograph.ink_color` |
 | Colors of the jersey in the player's photo | `photo.jersey_colors` |
-| Number on the jersey in the photo | `photo.jersey_number` |
-| Colors of the embedded real-life jersey swatch | `relic.swatch_colors` |
-| Limited card like 5/30 → the card's number (5) | `attributes.serial_number` |
-| …and the total population (30) | `attributes.serial_limit` |
+| Number on the jersey in the photo (+ candidates when unsure) | `photo.jersey_number`, `photo.jersey_number_candidates` |
+| Memorabilia yes/no (patch/ball/floor/jersey/shoe; can be several) | `memorabilia.present`, `memorabilia.pieces[]` |
+| Per piece: real fabric? colors + unique count, team-logo part, name/team letters | `pieces[].is_fabric`, `colors`, `unique_color_count`, `contains_*`, `letters_visible` |
+| Limited card 07/99 → this copy's number (07) and print run (99) | `attributes.serial_number`, `attributes.serial_limit` |
+| Serial matches the player's jersey number (rarer) | `attributes.serial_matches_jersey_number` |
 
-Plus optional enrichment fields: `year`, `manufacturer`, `set`, `subset`,
-`parallel`, `card_number`, `team`, grade/subgrades, and per-field confidence.
+Plus `parallel`, `team`, grade/subgrades, and per-field confidence. Extraction
+hint baked into prompts: year/brand/set/subset are usually at the **bottom of the
+card front** and on the **graded label**; front + back are always both provided.
 
 ## Repository layout
 ```

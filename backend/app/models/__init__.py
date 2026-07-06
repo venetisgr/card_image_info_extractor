@@ -7,28 +7,34 @@ Regenerate with ``bash shared/codegen/generate.sh`` — do not hand-edit
 
 from .card_info import (
     Attributes,
+    Autograph,
     CardInfo,
     CardType,
     Engine,
     GradedInfo,
     GradingCompany,
+    Memorabilia,
+    MemorabiliaPiece,
     Photo,
+    PieceType,
     Provenance,
-    Relic,
     Sport,
     Subgrades,
 )
 
 __all__ = [
     "Attributes",
+    "Autograph",
     "CardInfo",
     "CardType",
     "Engine",
     "GradedInfo",
     "GradingCompany",
+    "Memorabilia",
+    "MemorabiliaPiece",
     "Photo",
+    "PieceType",
     "Provenance",
-    "Relic",
     "Sport",
     "Subgrades",
 ]

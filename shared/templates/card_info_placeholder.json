@@ -1,0 +1,78 @@
+{
+  "_note": "PLACEHOLDER / output template for CardInfo. Shows every field and its allowed values. 'X | Y' means pick one; '... | null' means null when not visible/applicable/unsure. The binding contract is ../schema/card_info.schema.json — this file is for humans and for the extraction prompt. Remove '_note' in real records.",
+
+  "card_type": "graded | raw",
+  "sport": "baseball | basketball | football | hockey | soccer | other | null",
+  "player_name": "string | null",
+  "year": "string e.g. '2003' or '2003-04' | null  (hint: bottom of card front; graded label)",
+  "brand": "string e.g. 'Topps', 'Panini', 'Upper Deck' | null  (hint: bottom of card front; graded label)",
+  "set": "string | null  (hint: bottom of card front; graded label)",
+  "subset": "string | null  (hint: bottom of card front; graded label)",
+  "parallel": "string | null",
+  "card_number": "string — the card's number WITHIN the set, e.g. '#250' | null (NOT the 5/30 serial)",
+  "team": "string | null",
+  "language": "ISO code e.g. 'en' | null",
+
+  "attributes": {
+    "rookie": "true | false",
+    "serial_number": "string — this copy's number in '07/99' -> '07' | null",
+    "serial_limit": "string — total print run in '07/99' -> '99' | null",
+    "serial_matches_jersey_number": "true | false | null — true when serial number equals the player's jersey number (rarer)"
+  },
+
+  "photo": {
+    "jersey_colors": ["array of color names visible on the jersey in the player's PICTURE, or null"],
+    "jersey_number": "string best guess, e.g. '23' | null",
+    "jersey_number_candidates": ["if unsure, all plausible numbers best-first, e.g. '8', '3' — else null"]
+  },
+
+  "autograph": {
+    "present": "true | false | null",
+    "ink_color": "string, e.g. 'black' (standard), 'blue', 'gold' (non-black = rarer) | null"
+  },
+
+  "memorabilia": {
+    "present": "true | false | null",
+    "pieces": [
+      {
+        "type": "patch | jersey | ball | floor | shoe | other | null",
+        "is_fabric": "true if an actual piece of fabric/material, false if printed facsimile, null if unclear",
+        "colors": ["array of distinct colors in the piece, or null"],
+        "unique_color_count": "integer | null",
+        "contains_team_logo_part": "true | false | null",
+        "contains_player_name_part": "true | false | null",
+        "contains_team_name_part": "true | false | null",
+        "letters_visible": "string of any letters readable in the piece, e.g. 'AME' | null"
+      }
+    ]
+  },
+
+  "graded": {
+    "_when": "present when card_type = 'graded'; null for raw cards",
+    "grading_company": "PSA | BGS | SGC | CGC | TAG | other | null  (BGS = Beckett)",
+    "grade": "number 0-10, e.g. 9.5 | null",
+    "grade_label": "string as printed, e.g. 'GEM MINT 9.5' | null",
+    "description": "the descriptive info line(s) from the label | null",
+    "subgrades": {
+      "centering": "number | null",
+      "corners": "number | null",
+      "edges": "number | null",
+      "surface": "number | null"
+    },
+    "cert_number": "string | null",
+    "label_text": "full raw OCR of the label | null"
+  },
+
+  "per_field_confidence": {
+    "<field or dot-path>": "number 0-1, e.g. player_name: 0.97, 'autograph.ink_color': 0.8"
+  },
+
+  "provenance": {
+    "engine": "claude | on_device",
+    "model_version": "string",
+    "timestamp": "ISO-8601",
+    "source_images": ["front image ref/hash", "back image ref/hash"]
+  },
+
+  "raw_output": "object with raw OCR/model output for debugging | null"
+}

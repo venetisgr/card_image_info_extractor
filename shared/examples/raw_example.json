@@ -3,29 +3,37 @@
   "sport": "baseball",
   "player_name": "Ken Griffey Jr.",
   "year": "1989",
-  "manufacturer": "Upper Deck",
+  "brand": "Upper Deck",
   "set": "Upper Deck",
-  "subset": null,
+  "subset": "Star Rookie",
   "parallel": null,
   "card_number": "1",
   "team": "Seattle Mariners",
   "language": "en",
   "attributes": {
     "rookie": true,
-    "autograph": false,
-    "relic": false,
     "serial_number": null,
-    "serial_limit": null
+    "serial_limit": null,
+    "serial_matches_jersey_number": null
   },
   "photo": {
     "jersey_colors": ["blue", "yellow", "white"],
-    "jersey_number": null
+    "jersey_number": null,
+    "jersey_number_candidates": ["24", "21"]
   },
-  "relic": null,
+  "autograph": {
+    "present": false,
+    "ink_color": null
+  },
+  "memorabilia": {
+    "present": false,
+    "pieces": []
+  },
   "graded": null,
   "per_field_confidence": {
     "player_name": 0.93,
-    "card_number": 0.88
+    "card_number": 0.88,
+    "photo.jersey_number": 0.4
   },
   "provenance": {
     "engine": "on_device",

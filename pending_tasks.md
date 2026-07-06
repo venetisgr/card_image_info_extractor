@@ -1,7 +1,7 @@
 # Pending Tasks
 
 **Project:** Sports Card Image Information Extractor
-**Last updated:** 2026-06-03
+**Last updated:** 2026-07-06
 **See also:** `roadmap.md` (phases), `completed_tasks.md` (done), `scratchpad.md`.
 
 ## Conventions
@@ -18,11 +18,16 @@
 ---
 
 ## Phase 0 — Foundations
-- [x] 🔴 **P0-1** Define `CardInfo` **JSON Schema** in `/shared` — *done; covers the
-  priority fields (graded?/company/cert, player, `photo` jersey colors+number,
-  `relic.swatch_colors`, serial 5/30) and validates all examples. → completed_tasks.md*
+- [x] 🔴 **P0-1** Define `CardInfo` **JSON Schema** in `/shared` — *done (now v2);
+  covers graded?/company/cert/label-description, sport/year/brand/set/subset,
+  player, card # in set, autograph + ink color, photo jersey colors/number (+
+  candidates), memorabilia pieces (fabric/colors/logo/letters), serial 07/99 +
+  jersey-match flag. → completed_tasks.md*
 - [x] 🔴 **P0-2** Codegen from schema → **Pydantic** + **Kotlin** types — *done via
-  `shared/codegen/generate.sh`. → completed_tasks.md*
+  `shared/codegen/generate.sh`; regenerated for schema v2. → completed_tasks.md*
+- [x] 🟡 **P0-9** JSON **placeholder template** for the output shape — *done:
+  `shared/templates/card_info_placeholder.json`; kept in sync with the schema by a
+  test. → completed_tasks.md*
 - [x] 🔴 **P0-3** Scaffold repo dirs + minimal build files + tests — *done; backend
   `pytest` green (schema⇄examples⇄model). → completed_tasks.md*
 - [ ] 🟡 **P0-4** **Seed dataset**: collect 100–200 images (graded + raw; baseball,
@@ -49,6 +54,10 @@
 - [ ] 🟡 **P1-6** Front+back handling — *both images sent; back fields improve fill.*
 - [ ] 🟡 **P1-7** Model-tiering flag (Opus/Sonnet/Haiku) — *switchable per request.*
 - [ ] 🟢 **P1-8** CLI/notebook wrapper for local runs — *one command extracts an img.*
+- [ ] 🔴 **P1-9** Extraction prompt encodes the **field spec + hints** — *uses the
+  placeholder template; positional priors (year/brand/set/subset at bottom of front
+  + graded label); card# vs serial disambiguation; jersey-number candidates when
+  unsure; per-piece memorabilia analysis; ink-color detection.*
 
 ## Phase 2 — Enrichment & verification
 - [ ] 🔴 **P2-1** PSA **public API** client (OAuth2 + caching) — *cert # → fields.*
@@ -60,7 +69,7 @@
   *queryable by player/year/brand/number.*
 - [ ] 🟡 **P2-5** Raw fuzzy-match + fill — *measurable fill-rate improvement on raw
   samples.*
-- [ ] 🟡 **P2-6** Manufacturer/set **normalization tables** — *aliases canonicalized.*
+- [ ] 🟡 **P2-6** Brand/set **normalization tables** — *aliases canonicalized.*
 
 ## Phase 3 — On-device baseline (Android)
 - [ ] 🔴 **P3-1** Android project + **CameraX** capture (front/back) + gallery import.

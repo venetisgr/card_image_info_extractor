@@ -9,7 +9,7 @@ Holds the image dataset, ground-truth labels, and reference/normalization tables
 data/
 ├── images/          # captured card images (front + back)  [git-ignored: large/binary]
 ├── labels/          # ground-truth CardInfo JSON per image (see shared/schema)
-├── reference/       # normalization tables (manufacturers, sets, aliases)
+├── reference/       # normalization tables (brands, sets, aliases)
 └── manifest.csv     # index: image id -> sport/type/source/label path
 ```
 

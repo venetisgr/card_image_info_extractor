@@ -3,7 +3,7 @@
   "sport": "basketball",
   "player_name": "LeBron James",
   "year": "2003-04",
-  "manufacturer": "Upper Deck",
+  "brand": "Upper Deck",
   "set": "Exquisite Collection",
   "subset": "Rookie Patch Autograph",
   "parallel": null,
@@ -12,22 +12,49 @@
   "language": "en",
   "attributes": {
     "rookie": true,
-    "autograph": true,
-    "relic": true,
-    "serial_number": "5",
-    "serial_limit": "30"
+    "serial_number": "23",
+    "serial_limit": "99",
+    "serial_matches_jersey_number": true
   },
   "photo": {
     "jersey_colors": ["wine", "gold", "white"],
-    "jersey_number": "23"
+    "jersey_number": "23",
+    "jersey_number_candidates": null
   },
-  "relic": {
-    "swatch_colors": ["wine", "white"]
+  "autograph": {
+    "present": true,
+    "ink_color": "blue"
+  },
+  "memorabilia": {
+    "present": true,
+    "pieces": [
+      {
+        "type": "patch",
+        "is_fabric": true,
+        "colors": ["wine", "white", "gold"],
+        "unique_color_count": 3,
+        "contains_team_logo_part": true,
+        "contains_player_name_part": false,
+        "contains_team_name_part": false,
+        "letters_visible": null
+      },
+      {
+        "type": "jersey",
+        "is_fabric": true,
+        "colors": ["white"],
+        "unique_color_count": 1,
+        "contains_team_logo_part": false,
+        "contains_player_name_part": true,
+        "contains_team_name_part": false,
+        "letters_visible": "AME"
+      }
+    ]
   },
   "graded": {
     "grading_company": "BGS",
     "grade": 9.5,
     "grade_label": "GEM MINT 9.5",
+    "description": "2003-04 EXQUISITE COLLECTION #78 LEBRON JAMES ROOKIE PATCH AUTOGRAPH 23/99",
     "subgrades": {
       "centering": 9.5,
       "corners": 9.5,
@@ -35,15 +62,16 @@
       "surface": 9.5
     },
     "cert_number": "0012345678",
-    "label_text": "2003-04 EXQUISITE COLLECTION LEBRON JAMES RPA #78 5/30 BGS GEM MINT 9.5"
+    "label_text": "2003-04 EXQUISITE COLLECTION LEBRON JAMES RPA #78 23/99 BGS GEM MINT 9.5 0012345678"
   },
   "per_field_confidence": {
     "player_name": 0.99,
-    "grade": 1.0,
-    "cert_number": 0.98,
-    "serial_number": 0.95,
-    "serial_limit": 0.95,
-    "relic.swatch_colors": 0.8
+    "graded.grade": 1.0,
+    "graded.cert_number": 0.98,
+    "attributes.serial_number": 0.95,
+    "attributes.serial_limit": 0.95,
+    "autograph.ink_color": 0.9,
+    "memorabilia.pieces": 0.8
   },
   "provenance": {
     "engine": "claude",

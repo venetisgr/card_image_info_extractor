@@ -1,7 +1,7 @@
 # Architecture & Components
 
 **Project:** Sports Card Image Information Extractor
-**Last updated:** 2026-06-03
+**Last updated:** 2026-07-06
 **Status:** Design / pre-implementation
 
 ---
@@ -113,30 +113,40 @@ generate **Pydantic** models (backend) and **Kotlin** data classes (Android).
 | Field | Type | Notes |
 |---|---|---|
 | `card_type` | enum | `graded` \| `raw` |
-| `sport` | enum | baseball, basketball, football, hockey, soccer, other |
-| `player_name` | string | subject / athlete |
-| `year` | string | e.g. `2003` or `2003-04` |
-| `manufacturer` | string | Topps, Panini, Upper Deck, Bowman, Fleer, … (normalized) |
-| `set` | string | product/set name (normalized) |
+| `sport` | enum? | baseball, basketball, football, hockey, soccer, other |
+| `player_name` | string? | subject / athlete |
+| `year` | string? | e.g. `2003` or `2003-04` |
+| `brand` | string? | Topps, Panini, Upper Deck, Bowman, Fleer, … (normalized) |
+| `set` | string? | product/set name (normalized) |
 | `subset` | string? | insert / subset name |
 | `parallel` | string? | parallel / variation (e.g. "Silver Prizm") |
-| `card_number` | string | as printed (e.g. `RC-12`, `#250`) |
+| `card_number` | string? | the card's number **within the set** (e.g. `#250`) — NOT the 5/30 serial |
 | `team` | string? | team / franchise |
 | `language` | string? | ISO code if detectable |
 | `attributes.rookie` | bool | RC flag |
-| `attributes.autograph` | bool | on-card / sticker auto |
-| `attributes.relic` | bool | memorabilia/patch |
-| `attributes.serial_number` | string? | limited card like `5/30` → this card's number (`5`) |
-| `attributes.serial_limit` | string? | limited card like `5/30` → total population (`30`) |
+| `attributes.serial_number` | string? | limited card `07/99` → this copy's number (`07`) |
+| `attributes.serial_limit` | string? | limited card `07/99` → total print run (`99`) |
+| `attributes.serial_matches_jersey_number` | bool? | serial == player's jersey number (e.g. `07/99`, player wears #7) → rarer |
 | `photo.jersey_colors` | array? | colors of the jersey in the player's picture |
-| `photo.jersey_number` | string? | number on the jersey in the picture (e.g. `23`) |
-| `relic.swatch_colors` | array? | colors of the embedded real-life jersey swatch |
+| `photo.jersey_number` | string? | best-guess number on the jersey in the picture (e.g. `23`) |
+| `photo.jersey_number_candidates` | array? | when unsure: all plausible jersey numbers, best first |
+| `autograph.present` | bool? | autograph yes/no |
+| `autograph.ink_color` | string? | signature ink color — black is standard, non-black is rarer |
+| `memorabilia.present` | bool? | embedded memorabilia yes/no |
+| `memorabilia.pieces[]` | array | one entry per embedded piece — can be more than one |
+| `pieces[].type` | enum? | patch, jersey, ball, floor, shoe, other |
+| `pieces[].is_fabric` | bool? | actual piece of fabric/material vs printed facsimile |
+| `pieces[].colors` / `unique_color_count` | array? / int? | distinct colors in the piece (more colors ≈ rarer patch) |
+| `pieces[].contains_team_logo_part` | bool? | piece includes part of the team logo |
+| `pieces[].contains_player_name_part` / `contains_team_name_part` | bool? | piece includes nameplate/team lettering |
+| `pieces[].letters_visible` | string? | any letters readable in the piece (e.g. `AME`) |
 | `graded.grading_company` | enum? | PSA, BGS (Beckett), SGC, CGC, TAG, … |
 | `graded.grade` | number? | numeric grade (e.g. `10`, `9.5`) |
 | `graded.grade_label` | string? | e.g. `GEM-MT 10` |
+| `graded.description` | string? | the descriptive info line(s) printed on the label |
 | `graded.subgrades` | object? | `{centering, corners, edges, surface}` (BGS) |
 | `graded.cert_number` | string? | slab cert / serial |
-| `graded.label_text` | string? | full OCR of the label |
+| `graded.label_text` | string? | full raw OCR of the label |
 | `per_field_confidence` | object | 0–1 per field |
 | `provenance.engine` | enum | `claude` \| `on_device` |
 | `provenance.model_version` | string | model id / app build |
@@ -144,60 +154,56 @@ generate **Pydantic** models (backend) and **Kotlin** data classes (Android).
 | `provenance.source_images` | array | refs/hashes of input images |
 | `raw_output` | object | raw OCR text or model JSON (debug) |
 
-### Example — graded
+### Extraction hints (encoded into prompts/parsers)
+- **Year, brand, set and subset** are most often printed at the **bottom of the
+  card front**, and on the **label** if graded — prioritize those regions.
+- **Front + back are always both provided**; the back often carries the card
+  number, set details, and stats.
+- Don't confuse `card_number` (position within the set) with the serial numbering
+  (`attributes.serial_number`/`serial_limit`, the "07/99" print run).
+- If the jersey number in the photo is uncertain, return every plausible reading in
+  `photo.jersey_number_candidates` rather than guessing one.
+
+### Example — graded relic/auto showcase (exercises the priority fields)
 ```json
 {
   "card_type": "graded",
   "sport": "basketball",
-  "player_name": "Michael Jordan",
-  "year": "1986-87",
-  "manufacturer": "Fleer",
-  "set": "Fleer",
-  "card_number": "57",
-  "team": "Chicago Bulls",
-  "attributes": { "rookie": true, "autograph": false, "relic": false },
-  "graded": {
-    "grading_company": "PSA",
-    "grade": 9,
-    "grade_label": "MINT 9",
-    "cert_number": "12345678"
-  },
-  "per_field_confidence": { "player_name": 0.99, "grade": 1.0 },
-  "provenance": { "engine": "claude", "model_version": "claude-opus-4-8", "timestamp": "2026-06-03T10:00:00Z" }
-}
-```
-
-### Example — raw
-```json
-{
-  "card_type": "raw",
-  "sport": "baseball",
-  "player_name": "Ken Griffey Jr.",
-  "year": "1989",
-  "manufacturer": "Upper Deck",
-  "set": "Upper Deck",
-  "card_number": "1",
-  "team": "Seattle Mariners",
-  "attributes": { "rookie": true },
-  "per_field_confidence": { "player_name": 0.93, "card_number": 0.88 },
-  "provenance": { "engine": "on_device", "model_version": "android-0.3.1", "timestamp": "2026-06-03T10:01:00Z" }
-}
-```
-
-### Example — graded relic / serial-numbered (priority fields)
-```json
-{
-  "card_type": "graded",
   "player_name": "LeBron James",
-  "graded": { "grading_company": "BGS", "grade": 9.5, "cert_number": "0012345678" },
-  "attributes": { "rookie": true, "autograph": true, "relic": true, "serial_number": "5", "serial_limit": "30" },
-  "photo": { "jersey_colors": ["wine", "gold", "white"], "jersey_number": "23" },
-  "relic": { "swatch_colors": ["wine", "white"] }
+  "year": "2003-04",
+  "brand": "Upper Deck",
+  "set": "Exquisite Collection",
+  "subset": "Rookie Patch Autograph",
+  "card_number": "78",
+  "attributes": { "rookie": true, "serial_number": "23", "serial_limit": "99",
+                  "serial_matches_jersey_number": true },
+  "photo": { "jersey_colors": ["wine", "gold", "white"], "jersey_number": "23",
+             "jersey_number_candidates": null },
+  "autograph": { "present": true, "ink_color": "blue" },
+  "memorabilia": {
+    "present": true,
+    "pieces": [
+      { "type": "patch", "is_fabric": true, "colors": ["wine", "white", "gold"],
+        "unique_color_count": 3, "contains_team_logo_part": true,
+        "contains_player_name_part": false, "contains_team_name_part": false,
+        "letters_visible": null },
+      { "type": "jersey", "is_fabric": true, "colors": ["white"],
+        "unique_color_count": 1, "contains_team_logo_part": false,
+        "contains_player_name_part": true, "contains_team_name_part": false,
+        "letters_visible": "AME" }
+    ]
+  },
+  "graded": { "grading_company": "BGS", "grade": 9.5, "grade_label": "GEM MINT 9.5",
+              "description": "2003-04 EXQUISITE COLLECTION #78 LEBRON JAMES ROOKIE PATCH AUTOGRAPH 23/99",
+              "cert_number": "0012345678" }
 }
 ```
 
 > Full, schema-valid records (graded, graded-relic, raw) live in
-> [`shared/examples/`](shared/examples/); the contract itself is
+> [`shared/examples/`](shared/examples/); a human/prompt-facing **placeholder
+> template** showing every field lives at
+> [`shared/templates/card_info_placeholder.json`](shared/templates/card_info_placeholder.json);
+> the binding contract is
 > [`shared/schema/card_info.schema.json`](shared/schema/card_info.schema.json).
 
 ---
@@ -225,7 +231,7 @@ generate **Pydantic** models (backend) and **Kotlin** data classes (Android).
      authoritative fields; reconcile and override low-confidence OCR.
    - Raw: fuzzy-match against **checklist DB** (TCDB / SportsCardsPro) to normalize
      names and fill gaps (e.g., resolve set + card #).
-7. **Normalize & reconcile** — canonicalize manufacturer/set strings via lookup
+7. **Normalize & reconcile** — canonicalize brand/set strings via lookup
    tables; normalize grade labels; if both engines ran, merge by confidence.
 8. **Confidence & fallback** — if Engine B confidence < threshold, optionally
    escalate to Engine A (backend). Record both for eval.
@@ -297,7 +303,7 @@ mid-range devices, battery, and memory. Quantize models (int8) and benchmark.
   - Third-party verifiers (TCGAPIs, CardGrade.io) for BGS/CGC/SGC/TAG.
   - Checklist/catalog: TCDB, SportsCardsPro, Card Hedge (also pricing later).
   - **Caching layer** in front of all external APIs (respect rate limits).
-- **Reference DB** (Postgres): manufacturers, sets, normalization aliases, cached
+- **Reference DB** (Postgres): brands, sets, normalization aliases, cached
   cert/checklist results.
 - **Evaluation harness** (`/eval`): labeled dataset + scorer computing **per-field
   accuracy, latency, cost** for both engines; A/B + regression tracking.
