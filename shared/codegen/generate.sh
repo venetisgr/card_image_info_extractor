@@ -34,7 +34,7 @@ datamodel-codegen \
 echo "  -> backend/app/models/card_info.py"
 
 # --- Kotlin / kotlinx.serialization (Android) ---
-mkdir -p "$ROOT/android/app/src/main/java/com/cardextractor/model"
+mkdir -p "$ROOT/android/core/src/main/kotlin/com/cardextractor/model"
 npx --yes quicktype \
   --src "$SCHEMA" \
   --src-lang schema \
@@ -42,7 +42,7 @@ npx --yes quicktype \
   --framework kotlinx \
   --package com.cardextractor.model \
   --top-level CardInfo \
-  --out "$ROOT/android/app/src/main/java/com/cardextractor/model/CardInfo.kt"
-echo "  -> android/app/src/main/java/com/cardextractor/model/CardInfo.kt"
+  --out "$ROOT/android/core/src/main/kotlin/com/cardextractor/model/CardInfo.kt"
+echo "  -> android/core/src/main/kotlin/com/cardextractor/model/CardInfo.kt"
 
 echo "Done."

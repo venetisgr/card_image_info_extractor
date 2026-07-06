@@ -17,7 +17,7 @@ shared/
 
 ## Generated types (do not hand-edit)
 - **Python / Pydantic v2** → `backend/app/models/card_info.py`
-- **Kotlin / kotlinx.serialization** → `android/app/src/main/java/com/cardextractor/model/CardInfo.kt`
+- **Kotlin / kotlinx.serialization** → `android/core/src/main/kotlin/com/cardextractor/model/CardInfo.kt`
 
 ## Regenerating
 After editing `schema/card_info.schema.json`, regenerate both type sets:

@@ -82,14 +82,27 @@
 - [ ] 🟡 **P2-6** Brand/set **normalization tables** — *aliases canonicalized.*
 
 ## Phase 3 — On-device baseline (Android)
-- [ ] 🔴 **P3-1** Android project + **CameraX** capture (front/back) + gallery import.
-- [ ] 🔴 **P3-2** OpenCV pre-processing (quad detect, perspective warp, orient).
-- [ ] 🔴 **P3-3** **ML Kit Text Recognition v2** integration → OCR text.
-- [ ] 🔴 **P3-4** **ML Kit Barcode** → slab cert #.
-- [ ] 🔴 **P3-5** Rules-based parser + bundled reference subset → `CardInfo`.
-- [ ] 🟡 **P3-6** **Room** storage + scan history UI.
-- [ ] 🟡 **P3-7** **Retrofit** client: enrichment + **Claude fallback**.
-- [ ] 🟢 **P3-8** On-device vs cloud **mode toggle**.
+- [x] 🔴 **P3-1** Android project + capture (front/back) + gallery — *done via the
+  system camera (permission-free) + gallery picker; Gradle project with SDK-
+  conditional `:app` and pure-JVM `:core`. → completed_tasks.md*
+- [ ] 🟢 **P3-1b** In-app **CameraX** preview with card-framing guidance —
+  *follow-up; deps already in the version catalog.*
+- [ ] 🟡 **P3-2** OpenCV pre-processing (quad detect, perspective warp, orient) —
+  *deferred; ML Kit tolerates moderate skew.*
+- [x] 🔴 **P3-3** **ML Kit Text Recognition v2** → OCR text — *done (`vision/OcrEngine`).*
+- [x] 🔴 **P3-4** **ML Kit Barcode** → slab cert # — *done (`vision/BarcodeEngine`;
+  barcode payload outranks OCR digits for cert).*
+- [x] 🔴 **P3-5** Rules parser + bundled reference subset → `CardInfo` — *done and
+  **unit-tested on real-card fixtures (7 tests green)**: graded/raw, grades +
+  subgrades + autograph grade, cert, serial w/ COA-date rejection, year/brand/
+  set (set→brand precedence), card #, player + team heuristics.*
+- [x] 🟡 **P3-6** **Room** storage + scan history UI — *done.*
+- [x] 🟡 **P3-7** **Retrofit** client → backend `/extract` (Claude + PSA) — *done
+  as the cloud mode; confidence-driven AUTO-fallback remains P5-3.*
+- [x] 🟢 **P3-8** On-device vs cloud **mode toggle** — *done (segmented control).*
+- [ ] 🔴 **P3-9** Build `:app` in Android Studio + run on a device; fix whatever
+  the first real build/run surfaces — *this container has no Android SDK, so the
+  app module compiles unverified.*
 
 ## Phase 4 — On-device DL models
 - [ ] 🟡 **P4-1** Auto-label pipeline (Claude-as-labeler) + human review.

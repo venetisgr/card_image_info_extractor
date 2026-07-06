@@ -72,9 +72,13 @@ curl -F front=@front.jpg -F back=@back.jpg -F model=opus localhost:8000/extract
 ```
 
 ## Status
-**Phase 1 — Claude extraction engine: done and live-verified.** `POST /extract`
-takes front+back photos and returns validated `CardInfo` (forced tool use +
-corrective retry), with prompt caching (measured ~49% cost drop on cache hits)
-and model tiering (opus/sonnet/haiku). Next: real-photo validation (P1-10) and
-Phase 2 enrichment (PSA cert lookup + checklist matching). See
-[roadmap.md](roadmap.md) and [pending_tasks.md](pending_tasks.md).
+- **Engine A (Claude API): live.** `POST /extract` → validated `CardInfo`, prompt
+  caching (~49% cost cut), model tiering, **PSA cert verification** (token
+  pending). **Real-photo eval: ~91% strict field accuracy on 11 cards**
+  (`eval/results/real_seed/SUMMARY.md`).
+- **Engine B (Android on-device): Phase 3 baseline.** ML Kit OCR + barcode →
+  rules parser → same `CardInfo`; Room history; cloud-mode toggle. The parsing
+  core is **unit-tested on real-card fixtures**; open `android/` in Android
+  Studio to build the app (P3-9). Vision-only fields await Phase 4 models.
+- On hold per owner: checklist fuzzy-matching (P2-4/5). See
+  [roadmap.md](roadmap.md) · [pending_tasks.md](pending_tasks.md).
