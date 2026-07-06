@@ -245,6 +245,7 @@
           "anyOf": [ { "$ref": "#/$defs/Subgrades" }, { "type": "null" } ],
           "default": null
         },
+        "autograph_grade": { "description": "Separate autograph grade printed on some labels (e.g. BGS 'AUTOGRAPH 10'), distinct from the card grade.", "type": ["number", "null"], "minimum": 0, "maximum": 10, "default": null },
         "cert_number": { "description": "Certification/serial number on the slab.", "type": ["string", "null"], "default": null },
         "label_text": { "description": "Full raw OCR of the label, for reference.", "type": ["string", "null"], "default": null }
       }

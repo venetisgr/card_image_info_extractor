@@ -1,0 +1,45 @@
+{
+  "parallel": null,
+  "language": "en",
+  "per_field_confidence": {},
+  "card_type": "graded",
+  "sport": "football",
+  "player_name": "Tom Brady",
+  "year": "2000",
+  "brand": "Upper Deck",
+  "set": "Upper Deck",
+  "subset": "Star Rookie",
+  "card_number": "254",
+  "team": "New England Patriots",
+  "attributes": {
+    "rookie": true,
+    "serial_number": null,
+    "serial_limit": null,
+    "serial_matches_jersey_number": null
+  },
+  "photo": {
+    "jersey_colors": [
+      "orange"
+    ],
+    "jersey_number": "12",
+    "jersey_number_candidates": null
+  },
+  "autograph": {
+    "present": false,
+    "ink_color": null
+  },
+  "memorabilia": {
+    "present": false,
+    "pieces": []
+  },
+  "graded": {
+    "grading_company": "PSA",
+    "grade": 6,
+    "grade_label": "EX-MT 6",
+    "description": "2000 UPPER DECK #254 TOM BRADY",
+    "subgrades": null,
+    "autograph_grade": null,
+    "cert_number": "111281750",
+    "label_text": "PSA 2000 UPPER DECK TOM BRADY #254 EX-MT 6 111281750"
+  }
+}

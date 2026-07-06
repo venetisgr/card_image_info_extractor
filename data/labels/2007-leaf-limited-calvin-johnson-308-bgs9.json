@@ -1,0 +1,51 @@
+{
+  "parallel": null,
+  "language": "en",
+  "per_field_confidence": {},
+  "card_type": "graded",
+  "sport": "football",
+  "player_name": "Calvin Johnson",
+  "year": "2007",
+  "brand": "Leaf",
+  "set": "Leaf Limited",
+  "subset": "College Phenoms Autos Platinum Spotlight",
+  "card_number": "308",
+  "team": "Georgia Tech Yellow Jackets",
+  "attributes": {
+    "rookie": true,
+    "serial_number": "1",
+    "serial_limit": "1",
+    "serial_matches_jersey_number": false
+  },
+  "photo": {
+    "jersey_colors": [
+      "white",
+      "gold"
+    ],
+    "jersey_number": "21",
+    "jersey_number_candidates": null
+  },
+  "autograph": {
+    "present": true,
+    "ink_color": "black"
+  },
+  "memorabilia": {
+    "present": false,
+    "pieces": []
+  },
+  "graded": {
+    "grading_company": "BGS",
+    "grade": 9,
+    "grade_label": "9 MINT",
+    "description": "2007 LEAF LIMITED COLLEGE PHENOMS AUTOS PLATINUM SPOTLIGHT #308 CALVIN JOHNSON",
+    "subgrades": {
+      "centering": 9,
+      "corners": 8.5,
+      "edges": 9,
+      "surface": 9
+    },
+    "autograph_grade": 10,
+    "cert_number": "0018180806",
+    "label_text": "2007 LEAF LIMITED COLLEGE PHENOMS AUTOS PLATINUM SPOTLIGHT #308 CALVIN JOHNSON 9 MINT CENTERING 9 CORNERS 8.5 EDGES 9 SURFACE 9 0018180806 BECKETT 10 AUTOGRAPH"
+  }
+}

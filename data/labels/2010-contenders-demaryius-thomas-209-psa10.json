@@ -1,0 +1,47 @@
+{
+  "parallel": null,
+  "language": "en",
+  "per_field_confidence": {},
+  "card_type": "graded",
+  "sport": "football",
+  "player_name": "Demaryius Thomas",
+  "year": "2010",
+  "brand": "Panini",
+  "set": "Playoff Contenders",
+  "subset": "Rookie Ticket",
+  "card_number": "209",
+  "team": "Denver Broncos",
+  "attributes": {
+    "rookie": true,
+    "serial_number": null,
+    "serial_limit": null,
+    "serial_matches_jersey_number": null
+  },
+  "photo": {
+    "jersey_colors": [
+      "navy",
+      "orange",
+      "white"
+    ],
+    "jersey_number": "88",
+    "jersey_number_candidates": null
+  },
+  "autograph": {
+    "present": true,
+    "ink_color": "blue"
+  },
+  "memorabilia": {
+    "present": false,
+    "pieces": []
+  },
+  "graded": {
+    "grading_company": "PSA",
+    "grade": 10,
+    "grade_label": "GEM MT 10",
+    "description": "2010 PLAYOFF CONTENDERS #209 DEMARYIUS THOMAS RUSH/LOOK.FORWARD-AUTO.",
+    "subgrades": null,
+    "autograph_grade": null,
+    "cert_number": "20505941",
+    "label_text": "PSA 2010 PLAYOFF CONTENDERS DEMARYIUS THOMAS RUSH/LOOK.FORWARD-AUTO. #209 GEM MT 10 20505941"
+  }
+}

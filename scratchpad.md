@@ -89,6 +89,27 @@ each section. Be honest and specific here; this is the project's memory.
   (`additionalProperties` must be `false`). Forced tool use + server-side
   jsonschema validation + one corrective retry works well instead.
 
+## Real-photo lessons (2026-07-06, from the owner's 15 card photos)
+Folded into prompt v2 + schema; ground truth in `data/labels/` (11 cards):
+- **One-touch magnetic holders ≠ graded.** Several cards sit in clear screw/
+  magnetic cases with no grading label → must classify as raw. Added to prompt.
+- **Slab backs show branding only.** A BGS slab photographed from behind gives
+  company but no grade/cert → graded w/ nulls. Added to prompt.
+- **BGS labels can carry a separate AUTOGRAPH grade** ("BECKETT 10 AUTOGRAPH")
+  → new schema field `graded.autograph_grade`.
+- **Serial stamps usually live on the BACK** (05/99, 16/25, 40/50, 4/4, 1/1 all
+  on backs) → reinforced front+back capture; added to prompt.
+- **Letterman patches exist**: an entire letter cut from a nameplate
+  ("YELLOW JACKETS"), signed in SILVER ink on the patch → per-piece letter
+  flags + non-black ink both exercised by real data.
+- **Multi-piece relics are real**: one card embeds jersey + football + jersey
+  (3 pieces) — the pieces[] array design earns its keep.
+- **Same card number, different physical cards**: two NT #107 CJ copies (plain
+  jersey vs 3-color patch; one raw, one later PSA-graded) — card_number alone
+  is not identity.
+- **Inputs include app screenshots** (UI chrome) and rotated photos → prompt
+  now says to ignore chrome and read rotated text.
+
 ## Live results log
 - **2026-07-06 — Phase 1 smoke test (synthetic graded patch-auto card, opus).**
   All priority fields extracted correctly, incl. `serial_matches_jersey_number`

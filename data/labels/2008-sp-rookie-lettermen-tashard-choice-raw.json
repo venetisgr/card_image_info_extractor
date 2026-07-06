@@ -1,0 +1,54 @@
+{
+  "parallel": null,
+  "language": "en",
+  "per_field_confidence": {},
+  "card_type": "raw",
+  "sport": "football",
+  "player_name": "Tashard Choice",
+  "year": "2008",
+  "brand": "Upper Deck",
+  "set": "SP Rookie Threads",
+  "subset": "Rookie Lettermen",
+  "card_number": null,
+  "team": "Dallas Cowboys",
+  "attributes": {
+    "rookie": true,
+    "serial_number": "4",
+    "serial_limit": "4",
+    "serial_matches_jersey_number": false
+  },
+  "photo": {
+    "jersey_colors": [
+      "white",
+      "navy"
+    ],
+    "jersey_number": "23",
+    "jersey_number_candidates": [
+      "23",
+      "28"
+    ]
+  },
+  "autograph": {
+    "present": true,
+    "ink_color": "silver"
+  },
+  "memorabilia": {
+    "present": true,
+    "pieces": [
+      {
+        "type": "patch",
+        "is_fabric": true,
+        "colors": [
+          "black",
+          "yellow"
+        ],
+        "unique_color_count": 2,
+        "contains_team_logo_part": false,
+        "contains_player_name_part": false,
+        "contains_team_name_part": true,
+        "letters_visible": null
+      }
+    ]
+  },
+  "graded": null
+}

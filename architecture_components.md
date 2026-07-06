@@ -145,6 +145,7 @@ generate **Pydantic** models (backend) and **Kotlin** data classes (Android).
 | `graded.grade_label` | string? | e.g. `GEM-MT 10` |
 | `graded.description` | string? | the descriptive info line(s) printed on the label |
 | `graded.subgrades` | object? | `{centering, corners, edges, surface}` (BGS) |
+| `graded.autograph_grade` | number? | separate autograph grade on some labels (e.g. BGS "10 AUTOGRAPH") |
 | `graded.cert_number` | string? | slab cert / serial |
 | `graded.label_text` | string? | full raw OCR of the label |
 | `per_field_confidence` | object | 0–1 per field |

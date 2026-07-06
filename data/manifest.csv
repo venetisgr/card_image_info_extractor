@@ -1,0 +1,12 @@
+card_id,label,expected_images,images_present
+2008-topps-matt-ryan-rpa-mr,labels/2008-topps-matt-ryan-rpa-mr.json,images/seed/2008-topps-matt-ryan-rpa-mr__back.jpg,no
+2007-nt-calvin-johnson-107-jersey-raw,labels/2007-nt-calvin-johnson-107-jersey-raw.json,images/seed/2007-nt-calvin-johnson-107-jersey-raw__front.jpg,no
+2007-nt-calvin-johnson-107-patch-psa9,labels/2007-nt-calvin-johnson-107-patch-psa9.json,images/seed/2007-nt-calvin-johnson-107-patch-psa9__front.jpg;images/seed/2007-nt-calvin-johnson-107-patch-psa9__back.jpg,no
+2007-nt-calvin-johnson-auto-raw,labels/2007-nt-calvin-johnson-auto-raw.json,images/seed/2007-nt-calvin-johnson-auto-raw__front.jpg,no
+1996-collectors-choice-intl-jordan-j3-psa5,labels/1996-collectors-choice-intl-jordan-j3-psa5.json,images/seed/1996-collectors-choice-intl-jordan-j3-psa5__front.jpg,no
+2000-upper-deck-brady-254-psa6,labels/2000-upper-deck-brady-254-psa6.json,images/seed/2000-upper-deck-brady-254-psa6__front.jpg,no
+2010-contenders-demaryius-thomas-209-psa10,labels/2010-contenders-demaryius-thomas-209-psa10.json,images/seed/2010-contenders-demaryius-thomas-209-psa10__front.jpg;images/seed/2010-contenders-demaryius-thomas-209-psa10__back.jpg,no
+2007-leaf-limited-calvin-johnson-308-bgs9,labels/2007-leaf-limited-calvin-johnson-308-bgs9.json,images/seed/2007-leaf-limited-calvin-johnson-308-bgs9__front.jpg;images/seed/2007-leaf-limited-calvin-johnson-308-bgs9__back.jpg,no
+2008-sp-rookie-lettermen-tashard-choice-raw,labels/2008-sp-rookie-lettermen-tashard-choice-raw.json,images/seed/2008-sp-rookie-lettermen-tashard-choice-raw__front.jpg,no
+2007-threads-gridiron-kings-peterson-cgk11-raw,labels/2007-threads-gridiron-kings-peterson-cgk11-raw.json,images/seed/2007-threads-gridiron-kings-peterson-cgk11-raw__front.jpg;images/seed/2007-threads-gridiron-kings-peterson-cgk11-raw__back.jpg,no
+2007-gridiron-gear-peterson-216-raw,labels/2007-gridiron-gear-peterson-216-raw.json,images/seed/2007-gridiron-gear-peterson-216-raw__front.jpg;images/seed/2007-gridiron-gear-peterson-216-raw__back.jpg,no

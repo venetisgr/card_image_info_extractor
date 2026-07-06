@@ -1,0 +1,75 @@
+{
+  "parallel": null,
+  "language": "en",
+  "per_field_confidence": {},
+  "card_type": "raw",
+  "sport": "football",
+  "player_name": "Adrian Peterson",
+  "year": "2007",
+  "brand": "Donruss",
+  "set": "Gridiron Gear",
+  "subset": "Rookie Gridiron Gems",
+  "card_number": "216",
+  "team": "Minnesota Vikings",
+  "attributes": {
+    "rookie": true,
+    "serial_number": "40",
+    "serial_limit": "50",
+    "serial_matches_jersey_number": false
+  },
+  "photo": {
+    "jersey_colors": [
+      "purple",
+      "white",
+      "gold"
+    ],
+    "jersey_number": "28",
+    "jersey_number_candidates": null
+  },
+  "autograph": {
+    "present": true,
+    "ink_color": "black"
+  },
+  "memorabilia": {
+    "present": true,
+    "pieces": [
+      {
+        "type": "jersey",
+        "is_fabric": true,
+        "colors": [
+          "purple"
+        ],
+        "unique_color_count": 1,
+        "contains_team_logo_part": false,
+        "contains_player_name_part": false,
+        "contains_team_name_part": false,
+        "letters_visible": null
+      },
+      {
+        "type": "ball",
+        "is_fabric": true,
+        "colors": [
+          "brown"
+        ],
+        "unique_color_count": 1,
+        "contains_team_logo_part": false,
+        "contains_player_name_part": false,
+        "contains_team_name_part": false,
+        "letters_visible": null
+      },
+      {
+        "type": "jersey",
+        "is_fabric": true,
+        "colors": [
+          "white"
+        ],
+        "unique_color_count": 1,
+        "contains_team_logo_part": false,
+        "contains_player_name_part": false,
+        "contains_team_name_part": false,
+        "letters_visible": null
+      }
+    ]
+  },
+  "graded": null
+}

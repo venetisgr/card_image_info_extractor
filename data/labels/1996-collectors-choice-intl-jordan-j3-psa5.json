@@ -1,0 +1,45 @@
+{
+  "parallel": null,
+  "language": "es",
+  "per_field_confidence": {},
+  "card_type": "graded",
+  "sport": "basketball",
+  "player_name": "Michael Jordan",
+  "year": "1996",
+  "brand": "Upper Deck",
+  "set": "Collector's Choice International",
+  "subset": "Jordan's Journal",
+  "card_number": "J3",
+  "team": "Chicago Bulls",
+  "attributes": {
+    "rookie": false,
+    "serial_number": null,
+    "serial_limit": null,
+    "serial_matches_jersey_number": null
+  },
+  "photo": {
+    "jersey_colors": [
+      "red"
+    ],
+    "jersey_number": null,
+    "jersey_number_candidates": null
+  },
+  "autograph": {
+    "present": false,
+    "ink_color": null
+  },
+  "memorabilia": {
+    "present": false,
+    "pieces": []
+  },
+  "graded": {
+    "grading_company": "PSA",
+    "grade": 5,
+    "grade_label": "EX 5",
+    "description": "1996 COLL. CHOICE INT'L MICHAEL JORDAN SPANISH JORDAN'S JOURNAL #J3",
+    "subgrades": null,
+    "autograph_grade": null,
+    "cert_number": "111281730",
+    "label_text": "1996 COLL. CHOICE INT'L #J3 MICHAEL JORDAN EX SPANISH JORDAN'S JOURNAL 5 111281730 PSA"
+  }
+}

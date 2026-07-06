@@ -55,9 +55,11 @@
 - [x] 🔴 **P1-9** Prompt encodes field spec + hints — *done; placeholder template,
   positional priors, card#-vs-serial, jersey candidates, per-piece memorabilia,
   ink color; worked example included.*
-- [ ] 🟡 **P1-10** Test on **real card photos** (needs user-provided images) —
-  *the live smoke test used synthetic renders; validate on real photos incl.
-  glare/angle cases and a raw (ungraded) card.*
+- [~] 🟡 **P1-10** Test on **real card photos** — *in progress: user shared 15
+  photos (11 distinct cards); ground-truth labels written to `data/labels/` and
+  prompt v2 + `graded.autograph_grade` derived from them. BLOCKED on the photo
+  FILES: add them as `data/images/seed/<card_id>__front|back.jpg` (see
+  `data/images/seed/README.md`), then run `eval/compare.py` per card.*
 
 ## Phase 2 — Enrichment & verification
 - [ ] 🔴 **P2-1** PSA **public API** client (OAuth2 + caching) — *cert # → fields.*

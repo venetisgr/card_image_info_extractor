@@ -1,0 +1,62 @@
+{
+  "parallel": null,
+  "language": "en",
+  "per_field_confidence": {},
+  "card_type": "raw",
+  "sport": "football",
+  "player_name": "Adrian Peterson",
+  "year": "2007",
+  "brand": "Donruss",
+  "set": "Donruss Threads",
+  "subset": "College Gridiron Kings",
+  "card_number": "CGK-11",
+  "team": "Oklahoma Sooners",
+  "attributes": {
+    "rookie": true,
+    "serial_number": "16",
+    "serial_limit": "25",
+    "serial_matches_jersey_number": false
+  },
+  "photo": {
+    "jersey_colors": [
+      "red",
+      "white"
+    ],
+    "jersey_number": "28",
+    "jersey_number_candidates": null
+  },
+  "autograph": {
+    "present": true,
+    "ink_color": "black"
+  },
+  "memorabilia": {
+    "present": true,
+    "pieces": [
+      {
+        "type": "jersey",
+        "is_fabric": true,
+        "colors": [
+          "red"
+        ],
+        "unique_color_count": 1,
+        "contains_team_logo_part": false,
+        "contains_player_name_part": false,
+        "contains_team_name_part": false,
+        "letters_visible": null
+      },
+      {
+        "type": "jersey",
+        "is_fabric": true,
+        "colors": [
+          "red"
+        ],
+        "unique_color_count": 1,
+        "contains_team_logo_part": false,
+        "contains_player_name_part": false,
+        "contains_team_name_part": false,
+        "letters_visible": null
+      }
+    ]
+  },
+  "graded": null
+}

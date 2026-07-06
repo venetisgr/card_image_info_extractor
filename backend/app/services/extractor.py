@@ -121,7 +121,10 @@ class CardExtractor:
             content += [{"type": "text", "text": "BACK of the same card:"}, _image_block(back)]
         else:
             content.append(
-                {"type": "text", "text": "(No back image was provided for this card.)"}
+                {
+                    "type": "text",
+                    "text": "(Only one image was provided — it may show either face of the card.)",
+                }
             )
         content.append(
             {

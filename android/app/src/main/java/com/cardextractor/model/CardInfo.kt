@@ -188,6 +188,13 @@ enum class CardType(val value: String) {
 @Serializable
 data class GradedInfo (
     /**
+     * Separate autograph grade printed on some labels (e.g. BGS 'AUTOGRAPH 10'), distinct from
+     * the card grade.
+     */
+    @SerialName("autograph_grade")
+    val autographGrade: Double? = null,
+
+    /**
      * Certification/serial number on the slab.
      */
     @SerialName("cert_number")

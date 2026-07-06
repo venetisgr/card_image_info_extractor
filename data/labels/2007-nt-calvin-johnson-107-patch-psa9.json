@@ -1,0 +1,61 @@
+{
+  "parallel": null,
+  "language": "en",
+  "per_field_confidence": {},
+  "card_type": "graded",
+  "sport": "football",
+  "player_name": "Calvin Johnson",
+  "year": "2007",
+  "brand": "Playoff",
+  "set": "National Treasures",
+  "subset": null,
+  "card_number": "107",
+  "team": "Detroit Lions",
+  "attributes": {
+    "rookie": true,
+    "serial_number": "05",
+    "serial_limit": "99",
+    "serial_matches_jersey_number": false
+  },
+  "photo": {
+    "jersey_colors": [
+      "blue",
+      "white"
+    ],
+    "jersey_number": "81",
+    "jersey_number_candidates": null
+  },
+  "autograph": {
+    "present": true,
+    "ink_color": "black"
+  },
+  "memorabilia": {
+    "present": true,
+    "pieces": [
+      {
+        "type": "patch",
+        "is_fabric": true,
+        "colors": [
+          "blue",
+          "white",
+          "black"
+        ],
+        "unique_color_count": 3,
+        "contains_team_logo_part": null,
+        "contains_player_name_part": null,
+        "contains_team_name_part": null,
+        "letters_visible": null
+      }
+    ]
+  },
+  "graded": {
+    "grading_company": "PSA",
+    "grade": 9,
+    "grade_label": "MINT 9",
+    "description": "2007 PLAYOFF NAT.TREAS. #107 CALVIN JOHNSON AUTOGRAPH-JERSEY",
+    "subgrades": null,
+    "autograph_grade": null,
+    "cert_number": "26987167",
+    "label_text": "PSA 2007 PLAYOFF NAT.TREAS. CALVIN JOHNSON AUTOGRAPH-JERSEY #107 MINT 9 26987167"
+  }
+}

@@ -90,6 +90,12 @@ def test_system_prompt_is_static_and_covers_hints():
         "jersey_number_candidates",
         "Black is the standard",
         "MORE THAN ONE piece",
+        # real-photo lessons (2026-07-06)
+        "one-touch",
+        "photographed from the BACK",
+        "autograph_grade",
+        "OFTEN ON THE BACK",
+        "app interface",
     ):
         assert needle in p1
 

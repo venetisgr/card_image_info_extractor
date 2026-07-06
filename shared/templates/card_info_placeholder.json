@@ -59,6 +59,7 @@
       "edges": "number | null",
       "surface": "number | null"
     },
+    "autograph_grade": "number 0-10 — separate AUTOGRAPH grade some labels print (e.g. 'BECKETT 10 AUTOGRAPH') | null",
     "cert_number": "string | null",
     "label_text": "full raw OCR of the label | null"
   },

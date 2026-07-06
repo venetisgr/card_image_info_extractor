@@ -31,8 +31,9 @@ android/.idea/
 .env.*
 *.local
 
-# --- Data artifacts (keep READMEs + small reference tables; ignore large/binary) ---
-data/images/
+# --- Data artifacts ---
+# data/images/seed/ IS committed (small curated seed set, keep photos ~<5MB each);
+# bulk captures go elsewhere / object storage.
 data/raw/
 *.tflite
 

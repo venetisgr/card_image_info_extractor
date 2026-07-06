@@ -222,6 +222,10 @@ class GradedInfo(BaseModel):
     The descriptive information line(s) from the graded label (year/brand/set/player/card# as the grader printed them).
     """
     subgrades: Subgrades | None = None
+    autograph_grade: Annotated[float | None, Field(ge=0.0, le=10.0)] = None
+    """
+    Separate autograph grade printed on some labels (e.g. BGS 'AUTOGRAPH 10'), distinct from the card grade.
+    """
     cert_number: str | None = None
     """
     Certification/serial number on the slab.
