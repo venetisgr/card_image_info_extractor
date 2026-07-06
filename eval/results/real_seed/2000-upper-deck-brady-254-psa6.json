@@ -1,0 +1,67 @@
+{
+  "card_type": "graded",
+  "sport": "football",
+  "player_name": "Tom Brady",
+  "year": "2000",
+  "brand": "Upper Deck",
+  "set": "Upper Deck",
+  "subset": "Star Rookie",
+  "parallel": null,
+  "card_number": "254",
+  "team": "New England Patriots",
+  "language": "en",
+  "attributes": {
+    "rookie": true,
+    "serial_number": null,
+    "serial_limit": null,
+    "serial_matches_jersey_number": null
+  },
+  "photo": {
+    "jersey_colors": [
+      "orange",
+      "white"
+    ],
+    "jersey_number": "12",
+    "jersey_number_candidates": null
+  },
+  "autograph": {
+    "present": false,
+    "ink_color": null
+  },
+  "memorabilia": {
+    "present": false,
+    "pieces": []
+  },
+  "graded": {
+    "grading_company": "PSA",
+    "grade": 6.0,
+    "grade_label": "EX-MT 6",
+    "description": "2000 UPPER DECK #254 TOM BRADY",
+    "subgrades": null,
+    "autograph_grade": null,
+    "cert_number": "111281750",
+    "label_text": "2000 UPPER DECK TOM BRADY #254 EX-MT 6 PSA 111281750"
+  },
+  "per_field_confidence": {
+    "player_name": 0.99,
+    "year": 0.99,
+    "brand": 0.99,
+    "card_number": 0.98,
+    "graded.grade": 1.0,
+    "graded.grade_label": 0.98,
+    "graded.cert_number": 0.97,
+    "attributes.rookie": 0.95,
+    "subset": 0.85,
+    "photo.jersey_number": 0.97,
+    "team": 0.9
+  },
+  "provenance": {
+    "engine": "claude",
+    "model_version": "claude-opus-4-8",
+    "timestamp": "2026-07-06T16:49:02.881886Z",
+    "source_images": [
+      "sha256:750c0e18b8220bd8a975ff58baeb618f79c47f805ea81fe91ebb16b1f136bc93"
+    ]
+  },
+  "raw_output": null
+}

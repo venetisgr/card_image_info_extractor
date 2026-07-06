@@ -1,0 +1,51 @@
+{
+  "card_type": "graded",
+  "sport": "football",
+  "player_name": "Matt Ryan",
+  "year": "2008",
+  "brand": "Topps",
+  "set": "Topps",
+  "subset": null,
+  "parallel": null,
+  "card_number": "RPA-MR",
+  "team": "Atlanta Falcons",
+  "language": "en",
+  "attributes": {
+    "rookie": true,
+    "serial_number": null,
+    "serial_limit": null,
+    "serial_matches_jersey_number": null
+  },
+  "photo": null,
+  "autograph": null,
+  "memorabilia": null,
+  "graded": {
+    "grading_company": "BGS",
+    "grade": null,
+    "grade_label": null,
+    "description": null,
+    "subgrades": null,
+    "autograph_grade": null,
+    "cert_number": null,
+    "label_text": "THE WORLD'S MOST TRUSTED SOURCE IN COLLECTING - Beckett Grading Services"
+  },
+  "per_field_confidence": {
+    "player_name": 0.99,
+    "team": 0.99,
+    "year": 0.95,
+    "brand": 0.95,
+    "card_number": 0.85,
+    "attributes.rookie": 0.9,
+    "graded.grading_company": 0.97,
+    "sport": 0.99
+  },
+  "provenance": {
+    "engine": "claude",
+    "model_version": "claude-opus-4-8",
+    "timestamp": "2026-07-06T16:48:08.738392Z",
+    "source_images": [
+      "sha256:34a131e4c7e1aa53e05d556c76846b9f449af895181f7796ec89e4750db0d274"
+    ]
+  },
+  "raw_output": null
+}

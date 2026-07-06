@@ -111,6 +111,13 @@ Folded into prompt v2 + schema; ground truth in `data/labels/` (11 cards):
   now says to ignore chrome and read rotated text.
 
 ## Live results log
+- **2026-07-06 — REAL-PHOTO EVAL (11 cards): ~91% strict field accuracy.**
+  Details in `eval/results/real_seed/SUMMARY.md`. Highlights: one-touch→raw
+  classification 11/11 (the trap we prompted for), certs/grades/serials/players
+  essentially perfect, silver-ink + blue-ink autos detected, 3-piece relic card
+  scored 100%. Mismatches dominated by label-text word order (eval artifact)
+  and set-name canonicalization (evidence FOR resuming P2-4/P2-5). One genuinely
+  hard card (letterman patch: college-vs-pro team ambiguity, occluded jersey #).
 - **2026-07-06 — Phase 1 smoke test (synthetic graded patch-auto card, opus).**
   All priority fields extracted correctly, incl. `serial_matches_jersey_number`
   (23/99 + jersey 23), blue ink, 3-color patch with team-logo part, cert #,

@@ -55,11 +55,13 @@
 - [x] 🔴 **P1-9** Prompt encodes field spec + hints — *done; placeholder template,
   positional priors, card#-vs-serial, jersey candidates, per-piece memorabilia,
   ink color; worked example included.*
-- [~] 🟡 **P1-10** Test on **real card photos** — *in progress: user shared 15
-  photos (11 distinct cards); ground-truth labels written to `data/labels/` and
-  prompt v2 + `graded.autograph_grade` derived from them. BLOCKED on the photo
-  FILES: add them as `data/images/seed/<card_id>__front|back.jpg` (see
-  `data/images/seed/README.md`), then run `eval/compare.py` per card.*
+- [x] 🟡 **P1-10** Test on **real card photos** — *done 2026-07-06: 11 cards,
+  **~91% strict field accuracy**, all priority fields ~perfect (see
+  `eval/results/real_seed/SUMMARY.md`). → completed_tasks.md*
+- [ ] 🟢 **P1-11** Eval follow-ups from real-photo run — *fuzzy-score
+  `label_text`/`description` in compare.py; decide GT convention for facts not
+  visible in the image; prompt nudges (jersey-number candidates when occluded;
+  pictured pro team for lettermen cards).*
 
 ## Phase 2 — Enrichment & verification
 - [x] 🔴 **P2-1** PSA **public API** client — *done: bearer-token client with

@@ -1,0 +1,91 @@
+{
+  "card_type": "graded",
+  "sport": "football",
+  "player_name": "Calvin Johnson",
+  "year": "2007",
+  "brand": "Playoff",
+  "set": "National Treasures",
+  "subset": "Autograph - Jersey",
+  "parallel": null,
+  "card_number": "107",
+  "team": "Detroit Lions",
+  "language": "en",
+  "attributes": {
+    "rookie": true,
+    "serial_number": "05",
+    "serial_limit": "99",
+    "serial_matches_jersey_number": false
+  },
+  "photo": {
+    "jersey_colors": [
+      "blue",
+      "white"
+    ],
+    "jersey_number": "81",
+    "jersey_number_candidates": [
+      "81"
+    ]
+  },
+  "autograph": {
+    "present": true,
+    "ink_color": "black"
+  },
+  "memorabilia": {
+    "present": true,
+    "pieces": [
+      {
+        "type": "patch",
+        "is_fabric": true,
+        "colors": [
+          "blue",
+          "white",
+          "black"
+        ],
+        "unique_color_count": 3,
+        "contains_team_logo_part": null,
+        "contains_player_name_part": false,
+        "contains_team_name_part": false,
+        "letters_visible": null
+      }
+    ]
+  },
+  "graded": {
+    "grading_company": "PSA",
+    "grade": 9.0,
+    "grade_label": "MINT 9",
+    "description": "2007 PLAYOFF NAT. TREAS. CALVIN JOHNSON AUTOGRAPH - JERSEY #107",
+    "subgrades": null,
+    "autograph_grade": null,
+    "cert_number": "26987167",
+    "label_text": "PSA 2007 PLAYOFF NAT.TREAS. CALVIN JOHNSON AUTOGRAPH - JERSEY #107 MINT 9 26987167"
+  },
+  "per_field_confidence": {
+    "player_name": 0.99,
+    "year": 0.99,
+    "brand": 0.97,
+    "set": 0.96,
+    "subset": 0.95,
+    "card_number": 0.99,
+    "team": 0.98,
+    "attributes.rookie": 0.9,
+    "attributes.serial_number": 0.97,
+    "attributes.serial_limit": 0.97,
+    "photo.jersey_number": 0.85,
+    "autograph.present": 0.98,
+    "autograph.ink_color": 0.95,
+    "memorabilia.present": 0.98,
+    "memorabilia.pieces": 0.75,
+    "graded.grade": 1.0,
+    "graded.cert_number": 0.99
+  },
+  "provenance": {
+    "engine": "claude",
+    "model_version": "claude-opus-4-8",
+    "timestamp": "2026-07-06T16:48:36.235439Z",
+    "source_images": [
+      "sha256:3a76f87e252e6c763836b23464ebd6acd08fcad28ac673ccff8ad90d3b6352c3",
+      "sha256:9648e699a5d0c1e3e68452303ebcb71ecb1672289c3897dc89b1ce6fdc63fc42"
+    ]
+  },
+  "raw_output": null
+}

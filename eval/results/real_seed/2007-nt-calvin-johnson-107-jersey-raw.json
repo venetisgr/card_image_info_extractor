@@ -1,0 +1,76 @@
+{
+  "card_type": "raw",
+  "sport": "football",
+  "player_name": "Calvin Johnson",
+  "year": "2007",
+  "brand": "Playoff",
+  "set": "National Treasures",
+  "subset": null,
+  "parallel": null,
+  "card_number": null,
+  "team": "Detroit Lions",
+  "language": "en",
+  "attributes": {
+    "rookie": true,
+    "serial_number": null,
+    "serial_limit": null,
+    "serial_matches_jersey_number": null
+  },
+  "photo": {
+    "jersey_colors": [
+      "blue",
+      "white"
+    ],
+    "jersey_number": "81",
+    "jersey_number_candidates": [
+      "81",
+      "8"
+    ]
+  },
+  "autograph": {
+    "present": true,
+    "ink_color": "black"
+  },
+  "memorabilia": {
+    "present": true,
+    "pieces": [
+      {
+        "type": "jersey",
+        "is_fabric": true,
+        "colors": [
+          "blue"
+        ],
+        "unique_color_count": 1,
+        "contains_team_logo_part": false,
+        "contains_player_name_part": false,
+        "contains_team_name_part": false,
+        "letters_visible": null
+      }
+    ]
+  },
+  "graded": null,
+  "per_field_confidence": {
+    "player_name": 0.99,
+    "sport": 0.99,
+    "team": 0.97,
+    "brand": 0.95,
+    "set": 0.95,
+    "year": 0.85,
+    "attributes.rookie": 0.9,
+    "autograph.present": 0.98,
+    "autograph.ink_color": 0.95,
+    "memorabilia.present": 0.98,
+    "memorabilia.pieces": 0.9,
+    "photo.jersey_number": 0.6,
+    "card_type": 0.9
+  },
+  "provenance": {
+    "engine": "claude",
+    "model_version": "claude-opus-4-8",
+    "timestamp": "2026-07-06T16:48:24.078061Z",
+    "source_images": [
+      "sha256:654953420297b2bb0983e9131da9911fbe6fc2f6c444a22a6013db76b8c7bcf7"
+    ]
+  },
+  "raw_output": null
+}
