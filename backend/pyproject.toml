@@ -8,17 +8,19 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-# Runtime deps for the API service — wired up in Phase 1+ (see roadmap.md).
+# Runtime deps for the API service (Phase 1 Claude extraction engine).
 api = [
     "fastapi>=0.110",
     "uvicorn[standard]>=0.29",
+    "python-multipart>=0.0.9",
     "anthropic>=0.40",
-    "httpx>=0.27",
+    "jsonschema>=4.20",
     "pillow>=10.0",
 ]
 # Tooling for tests and type (re)generation.
 dev = [
     "pytest>=8.0",
+    "httpx>=0.27",
     "jsonschema>=4.20",
     "datamodel-code-generator>=0.25",
 ]

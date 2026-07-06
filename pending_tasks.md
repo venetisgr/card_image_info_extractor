@@ -40,24 +40,24 @@
 - [ ] 🔴 **P0-8** Secrets strategy doc (server-side only; no keys in app) — *written
   and referenced in `resources.md`.*
 
-## Phase 1 — Claude API vertical slice
-- [ ] 🔴 **P1-1** FastAPI skeleton + `POST /extract` (multipart images) — *returns
-  200 with a stub `CardInfo`.*
-- [ ] 🔴 **P1-2** Image pre-processing: EXIF-strip, resize ≤2576 px long edge —
-  *validated on sample images.*
-- [ ] 🔴 **P1-3** Claude extraction with **structured output** (tool/JSON-schema) →
-  `CardInfo` — *valid output for a clear graded and a clear raw sample.*
-- [ ] 🔴 **P1-4** **Prompt caching** of system prompt + schema + few-shot — *cache
-  hits observed; cost/latency drop measured.*
-- [ ] 🟡 **P1-5** Schema validation + one corrective retry — *malformed output is
-  caught and corrected or surfaced.*
-- [ ] 🟡 **P1-6** Front+back handling — *both images sent; back fields improve fill.*
-- [ ] 🟡 **P1-7** Model-tiering flag (Opus/Sonnet/Haiku) — *switchable per request.*
-- [ ] 🟢 **P1-8** CLI/notebook wrapper for local runs — *one command extracts an img.*
-- [ ] 🔴 **P1-9** Extraction prompt encodes the **field spec + hints** — *uses the
-  placeholder template; positional priors (year/brand/set/subset at bottom of front
-  + graded label); card# vs serial disambiguation; jersey-number candidates when
-  unsure; per-piece memorabilia analysis; ink-color detection.*
+## Phase 1 — Claude API vertical slice ✅ (done 2026-07-06 → completed_tasks.md)
+- [x] 🔴 **P1-1** FastAPI `POST /extract` — *done; multipart front(+back)+model.*
+- [x] 🔴 **P1-2** Image pre-processing — *done; EXIF fix/strip, RGB, ≤2576 px, JPEG.*
+- [x] 🔴 **P1-3** Claude extraction via forced tool use → `CardInfo` — *done; live
+  run extracts all priority fields correctly on a graded patch-auto sample.*
+- [x] 🔴 **P1-4** Prompt caching — *done; measured live: 8,496 tokens cached,
+  second call read 100% from cache, ~49% cost drop.*
+- [x] 🟡 **P1-5** Schema validation + one corrective retry — *done; validated
+  server-side incl. the graded-conditional; errored tool_result retry.*
+- [x] 🟡 **P1-6** Front+back handling — *done; both images in one user turn.*
+- [x] 🟡 **P1-7** Model tiering — *done; opus/sonnet/haiku aliases or any model id.*
+- [x] 🟢 **P1-8** CLI wrapper — *done; `python -m app.cli front.jpg back.jpg`.*
+- [x] 🔴 **P1-9** Prompt encodes field spec + hints — *done; placeholder template,
+  positional priors, card#-vs-serial, jersey candidates, per-piece memorabilia,
+  ink color; worked example included.*
+- [ ] 🟡 **P1-10** Test on **real card photos** (needs user-provided images) —
+  *the live smoke test used synthetic renders; validate on real photos incl.
+  glare/angle cases and a raw (ungraded) card.*
 
 ## Phase 2 — Enrichment & verification
 - [ ] 🔴 **P2-1** PSA **public API** client (OAuth2 + caching) — *cert # → fields.*

@@ -76,9 +76,28 @@ each section. Be honest and specific here; this is the project's memory.
   plan early? (Mitigate with aggressive caching.)
 
 ## What didn't work / dead ends
-*(empty — fill this in as we learn. Record the approach, why it failed, and the
-evidence, so we don't retry it.)*
-- …
+*(Record the approach, why it failed, and the evidence, so we don't retry it.)*
+- **2026-07-06 — top-level `allOf` in a tool `input_schema`.** The Messages API
+  rejects `oneOf`/`allOf`/`anyOf` at the top level of a tool input schema
+  (400: `input_schema does not support oneOf, allOf, or anyOf at the top
+  level`). Our graded-requires-`graded` conditional had to move out of the
+  tool schema; it stays in the shared schema and is enforced server-side with
+  a corrective retry. Nested `anyOf` (nullable fields) is fine.
+- **2026-07-06 — strict structured outputs for CardInfo.** Not usable directly:
+  `per_field_confidence` is an open map (`additionalProperties: {number}`),
+  which strict structured outputs / strict tool use don't support
+  (`additionalProperties` must be `false`). Forced tool use + server-side
+  jsonschema validation + one corrective retry works well instead.
+
+## Live results log
+- **2026-07-06 — Phase 1 smoke test (synthetic graded patch-auto card, opus).**
+  All priority fields extracted correctly, incl. `serial_matches_jersey_number`
+  (23/99 + jersey 23), blue ink, 3-color patch with team-logo part, cert #,
+  label description, brand/set/subset from the bottom-of-front line + label.
+  Latency ~12-13s/scan. Cache: run 1 wrote 8,496 prefix tokens; run 2 read all
+  8,496 from cache → cost ~$0.099 → ~$0.050 (-49%). Validation retry never
+  triggered (attempts=1). Caveat: synthetic render, not a real photo — real-photo
+  validation is P1-10.
 
 ## Handy references (to revisit during build)
 - PSA public API: `https://www.psacard.com/publicapi/documentation` (OAuth2).

@@ -63,7 +63,18 @@ python -m pytest
 bash ../shared/codegen/generate.sh
 ```
 
+## Extract a card (Phase 1, live)
+```bash
+cd backend && . .venv/bin/activate            # with ANTHROPIC_API_KEY in backend/.env
+python -m app.cli front.jpg back.jpg          # CLI
+uvicorn app.main:app --reload                 # or the API:
+curl -F front=@front.jpg -F back=@back.jpg -F model=opus localhost:8000/extract
+```
+
 ## Status
-**Phase 0 — Foundations.** The `CardInfo` schema, generated Pydantic + Kotlin types,
-examples, tests, and repo scaffold are in place. Next: seed dataset + Phase 1 Claude
-extraction endpoint. See [roadmap.md](roadmap.md) and [pending_tasks.md](pending_tasks.md).
+**Phase 1 — Claude extraction engine: done and live-verified.** `POST /extract`
+takes front+back photos and returns validated `CardInfo` (forced tool use +
+corrective retry), with prompt caching (measured ~49% cost drop on cache hits)
+and model tiering (opus/sonnet/haiku). Next: real-photo validation (P1-10) and
+Phase 2 enrichment (PSA cert lookup + checklist matching). See
+[roadmap.md](roadmap.md) and [pending_tasks.md](pending_tasks.md).

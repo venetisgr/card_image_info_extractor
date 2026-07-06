@@ -26,7 +26,7 @@ phasing in `roadmap.md` lets one person make steady progress.*
 ## 2. Accounts & external APIs
 | Service | Use | Notes / limits |
 |---|---|---|
-| **Anthropic (Claude API)** | Engine A vision extraction | Models: `claude-opus-4-8` (frontier), `claude-sonnet-4-6`, `claude-haiku-4-5`. Vision: high-res up to 2576 px long edge. |
+| **Anthropic (Claude API)** | Engine A vision extraction | Models: `claude-opus-4-8` (default), `claude-sonnet-5`, `claude-haiku-4-5`. Vision: high-res up to 2576 px long edge. Key lives in `backend/.env` (git-ignored). |
 | **PSA Public API** | Graded cert verification | OAuth2 (password grant); **~100 calls/day free**, paid tiers higher. Authoritative graded fields. |
 | **TCGAPIs / CardGrade.io** | BGS/CGC/SGC/TAG verify | Third-party cert lookup beyond PSA; small free quotas. |
 | **TCDB** | Checklists / catalog | Set/player checklists for raw-card matching. |
@@ -100,17 +100,17 @@ never directly to Anthropic/PSA.*
 ---
 
 ## 7. Cost model (rough, for budgeting)
-**Claude per scan (Engine A).** A native-resolution image is ~4.8k input tokens; add
-the prompt + schema (heavily **cache-discounted** after first call) and a small JSON
-output. Order-of-magnitude per image (input-dominated):
+**Claude per scan (Engine A) — now measured live (2026-07-06).** A front+back scan
+with our prompt is ~3.8k image/turn tokens + ~8.5k static prefix (schema + field
+guide + example; **cached** after the first call) + ~1k output.
 
-| Model | ~Input $/1M | Rough cost / image* |
+| Model | $/1M in / out | Measured / est. cost per front+back scan |
 |---|---|---|
-| `claude-opus-4-8` | $6.25 | ~$0.03–0.05 |
-| `claude-sonnet-4-6` | (mid) | ~$0.01–0.02 |
-| `claude-haiku-4-5` | (low) | ~fractions of a cent |
+| `claude-opus-4-8` | $5.00 / $25.00 | **$0.099 first call → $0.050 on cache hits** (measured) |
+| `claude-sonnet-5` | $3.00 / $15.00 | ~$0.03 cached (est.) |
+| `claude-haiku-4-5` | $1.00 / $5.00 | ~$0.01 cached (est.) |
 
-\*Indicative; depends on image size, prompt size, caching, and output length.
+Latency measured: ~12–13 s/scan on opus.
 **Levers:** prompt caching, model tiering by difficulty, resize to model res, and
 **on-device-first with fallback** so only hard scans hit Claude.
 
