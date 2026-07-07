@@ -30,7 +30,7 @@ object Reference {
         "GRIDIRON GEAR" to "Gridiron Gear",
         "LEAF LIMITED" to "Leaf Limited",
         "CONTENDERS" to "Playoff Contenders",
-        "THREADS" to "Threads",
+        "THREADS" to "Donruss Threads",
         "PRIZM" to "Prizm",
         "SELECT" to "Select",
         "MOSAIC" to "Mosaic",

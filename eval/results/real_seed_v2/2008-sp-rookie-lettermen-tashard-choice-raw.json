@@ -1,0 +1,77 @@
+{
+  "card_type": "raw",
+  "sport": "football",
+  "player_name": "Tashard Choice",
+  "year": "2008",
+  "brand": "Upper Deck",
+  "set": "SP Rookie Threads",
+  "subset": "Rookie Lettermen",
+  "parallel": null,
+  "card_number": null,
+  "team": "Dallas Cowboys",
+  "language": "en",
+  "attributes": {
+    "rookie": true,
+    "serial_number": "4",
+    "serial_limit": "4",
+    "serial_matches_jersey_number": null
+  },
+  "photo": {
+    "jersey_colors": [
+      "white",
+      "blue",
+      "silver"
+    ],
+    "jersey_number": null,
+    "jersey_number_candidates": null
+  },
+  "autograph": {
+    "present": true,
+    "ink_color": "silver"
+  },
+  "memorabilia": {
+    "present": true,
+    "pieces": [
+      {
+        "type": "patch",
+        "is_fabric": true,
+        "colors": [
+          "black",
+          "gold"
+        ],
+        "unique_color_count": 2,
+        "contains_team_logo_part": false,
+        "contains_player_name_part": true,
+        "contains_team_name_part": false,
+        "letters_visible": null
+      }
+    ]
+  },
+  "graded": null,
+  "per_field_confidence": {
+    "player_name": 0.97,
+    "sport": 0.95,
+    "set": 0.9,
+    "subset": 0.9,
+    "brand": 0.85,
+    "year": 0.6,
+    "team": 0.85,
+    "attributes.rookie": 0.9,
+    "attributes.serial_number": 0.85,
+    "attributes.serial_limit": 0.85,
+    "autograph.present": 0.95,
+    "autograph.ink_color": 0.85,
+    "memorabilia.present": 0.95,
+    "memorabilia.pieces": 0.85,
+    "card_type": 0.9
+  },
+  "provenance": {
+    "engine": "claude",
+    "model_version": "claude-opus-4-8",
+    "timestamp": "2026-07-07T00:43:03.430586Z",
+    "source_images": [
+      "sha256:adce1702c6e58e3f8e52ece0305a1670d14a04956d22f2799e0da52944fa0671"
+    ]
+  },
+  "raw_output": null
+}

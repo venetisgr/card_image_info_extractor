@@ -14,6 +14,7 @@ from app.config import MAX_UPLOAD_BYTES, load_dotenv, resolve_model
 from app.services.enrich import enrich_card
 from app.services.extractor import CardExtractor, ExtractionError
 from app.services.images import ImageError, preprocess_image
+from app.services.normalize import normalize_card
 from app.services.psa import PSAClient, PSAError
 
 logger = logging.getLogger("card_extractor")
@@ -89,6 +90,9 @@ async def extract(
         card, outcome = enrich_card(card, psa_client)
         if outcome.attempted:
             logger.info("psa enrichment: %s (changed=%s)", outcome.note, outcome.changed_fields)
+    card, normalized = normalize_card(card)
+    if normalized:
+        logger.info("normalized fields: %s", normalized)
 
     logger.info("extracted card_type=%s usage=%s", card.card_type, result.usage.as_dict())
     return JSONResponse(card.model_dump(mode="json"))

@@ -111,6 +111,13 @@ Folded into prompt v2 + schema; ground truth in `data/labels/` (11 cards):
   now says to ignore chrome and read rotated text.
 
 ## Live results log
+- **2026-07-06 — accuracy push v2: 98.6% (was 91% strict).** Breakdown of the
+  gain: fair scoring of faithful transcriptions +4.1pts; normalization tables +
+  prompt v3.1 + GT convention +3.5pts. 8/11 cards perfect. Remaining tail is
+  run-to-run vision variance (RPA↔RPB on tiny rotated print; gray↔white patch
+  shade) + letterman plate semantics (read team-name plate as player-name).
+  Lesson: with naming systematics gone, the next real lever is verification
+  (PSA live) and self-consistency voting, not more prompt text.
 - **2026-07-06 — REAL-PHOTO EVAL (11 cards): ~91% strict field accuracy.**
   Details in `eval/results/real_seed/SUMMARY.md`. Highlights: one-touch→raw
   classification 11/11 (the trap we prompted for), certs/grades/serials/players

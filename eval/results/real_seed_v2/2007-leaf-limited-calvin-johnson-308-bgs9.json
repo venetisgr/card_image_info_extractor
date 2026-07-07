@@ -1,0 +1,80 @@
+{
+  "card_type": "graded",
+  "sport": "football",
+  "player_name": "Calvin Johnson",
+  "year": "2007",
+  "brand": "Leaf",
+  "set": "Leaf Limited",
+  "subset": "College Phenoms Autos Platinum Spotlight",
+  "parallel": "Platinum Spotlight",
+  "card_number": "308",
+  "team": "Georgia Tech Yellow Jackets",
+  "language": "en",
+  "attributes": {
+    "rookie": true,
+    "serial_number": "1",
+    "serial_limit": "1",
+    "serial_matches_jersey_number": false
+  },
+  "photo": {
+    "jersey_colors": [
+      "white",
+      "gold",
+      "black"
+    ],
+    "jersey_number": "21",
+    "jersey_number_candidates": null
+  },
+  "autograph": {
+    "present": true,
+    "ink_color": "black"
+  },
+  "memorabilia": {
+    "present": false,
+    "pieces": []
+  },
+  "graded": {
+    "grading_company": "BGS",
+    "grade": 9.0,
+    "grade_label": "MINT 9",
+    "description": "2007 LEAF LIMITED COLLEGE PHENOMS AUTOS PLATINUM SPOTLIGHT #308 CALVIN JOHNSON",
+    "subgrades": {
+      "centering": 9.0,
+      "corners": 8.5,
+      "edges": 9.0,
+      "surface": 9.0
+    },
+    "autograph_grade": 10.0,
+    "cert_number": "0018180806",
+    "label_text": "2007 LEAF LIMITED COLLEGE PHENOMS AUTOS PLATINUM SPOTLIGHT #308 CALVIN JOHNSON CENTERING 9 CORNERS 8.5 EDGES 9 SURFACE 9 9 MINT 0018180806 BECKETT 10 AUTOGRAPH"
+  },
+  "per_field_confidence": {
+    "player_name": 0.99,
+    "year": 0.99,
+    "brand": 0.97,
+    "set": 0.97,
+    "subset": 0.95,
+    "card_number": 0.98,
+    "team": 0.97,
+    "attributes.rookie": 0.98,
+    "attributes.serial_number": 0.97,
+    "attributes.serial_limit": 0.97,
+    "photo.jersey_number": 0.9,
+    "autograph.present": 0.99,
+    "autograph.ink_color": 0.9,
+    "graded.grade": 1.0,
+    "graded.autograph_grade": 0.98,
+    "graded.cert_number": 0.97,
+    "graded.subgrades": 0.97
+  },
+  "provenance": {
+    "engine": "claude",
+    "model_version": "claude-opus-4-8",
+    "timestamp": "2026-07-07T00:40:08.416096Z",
+    "source_images": [
+      "sha256:05368221893f85151a5ef9f0dd5edd9abe9bc0f12f3bacd475ff35a935de262e",
+      "sha256:98642b2ea9220577a66658ce8853f9128a51ae806db60d78c0730274a99d59f0"
+    ]
+  },
+  "raw_output": null
+}

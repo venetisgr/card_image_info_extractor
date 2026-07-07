@@ -1,7 +1,4 @@
 {
-  "parallel": null,
-  "language": "en",
-  "per_field_confidence": {},
   "card_type": "raw",
   "sport": "football",
   "player_name": "Calvin Johnson",
@@ -9,8 +6,10 @@
   "brand": "Playoff",
   "set": "National Treasures",
   "subset": null,
+  "parallel": null,
   "card_number": null,
   "team": "Detroit Lions",
+  "language": "en",
   "attributes": {
     "rookie": true,
     "serial_number": null,
@@ -23,7 +22,10 @@
       "white"
     ],
     "jersey_number": "81",
-    "jersey_number_candidates": null
+    "jersey_number_candidates": [
+      "81",
+      "8"
+    ]
   },
   "autograph": {
     "present": true,
@@ -46,5 +48,29 @@
       }
     ]
   },
-  "graded": null
+  "graded": null,
+  "per_field_confidence": {
+    "player_name": 0.99,
+    "sport": 0.99,
+    "team": 0.97,
+    "brand": 0.9,
+    "set": 0.95,
+    "year": 0.75,
+    "attributes.rookie": 0.95,
+    "autograph.present": 0.98,
+    "autograph.ink_color": 0.95,
+    "memorabilia.present": 0.98,
+    "memorabilia.pieces": 0.9,
+    "photo.jersey_number": 0.6,
+    "card_type": 0.85
+  },
+  "provenance": {
+    "engine": "claude",
+    "model_version": "claude-opus-4-8",
+    "timestamp": "2026-07-07T00:39:07.196598Z",
+    "source_images": [
+      "sha256:654953420297b2bb0983e9131da9911fbe6fc2f6c444a22a6013db76b8c7bcf7"
+    ]
+  },
+  "raw_output": null
 }

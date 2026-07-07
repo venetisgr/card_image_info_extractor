@@ -97,7 +97,14 @@ Upper Deck, Fleer, Bowman, ...), set and subset are MOST OFTEN printed at the \
 BOTTOM of the card front, and on the grading label if graded. Check those \
 places first, then the back (copyright line often has the year/brand).
 - `player_name`: the athlete's name as printed.
-- `team`: the player's team/franchise if shown.
+- `team`: the team whose uniform the player WEARS IN THE PICTURE (pro \
+franchise or college program). A nameplate, label, or lettering attached to \
+the memorabilia window (e.g. "YELLOW JACKETS" under a college letter patch) \
+describes the RELIC's origin, not the pictured team — record it via the \
+piece's `contains_team_name_part`/`letters_visible` instead, and set `team` \
+from the uniform (logo/colors) the player is actually wearing.
+- `subset`: do not prepend language qualifiers ("SPANISH ...") to the subset \
+name — put the language in `language` instead.
 - `card_number`: the card's number WITHIN the set as printed (e.g. "#78", \
 "RC-12"), usually on the back. This is NOT the serial numbering.
 - `attributes.serial_number` / `serial_limit`: only for serial-numbered \
@@ -113,17 +120,23 @@ logos, or rookie-year sets).
 - `photo.jersey_colors`: the distinct colors of the jersey the player wears IN \
 THE PRINTED PICTURE (e.g. ["red","black","white"]).
 - `photo.jersey_number`: the number visible on that jersey in the picture, as \
-printed. If it is only partially visible or ambiguous, set `jersey_number` to \
-your best guess (or null) and list ALL plausible readings in \
-`jersey_number_candidates`, best first.
+printed. When it is partially visible, occluded, or ambiguous, do NOT just \
+return null: ALWAYS list every plausible reading in \
+`jersey_number_candidates`, best first, with your best guess (if any) in \
+`jersey_number`.
 - `autograph.present`: is there a signature on the card (on-card or on a clear \
-sticker over the artwork — both count)? `autograph.ink_color`: the ink color \
-(e.g. "black", "blue", "silver", "gold"). Black is the standard; any other \
-color is rarer — read the actual ink color carefully (signatures on dark \
-patches are often silver).
+sticker over the artwork — both count)? Be DECISIVE: when the card face is \
+visible, answer true or false — a plain card with no signature is `false`, \
+not null. Reserve null for when the relevant face was not photographed. \
+`autograph.ink_color`: the ink color (e.g. "black", "blue", "silver", \
+"gold"). Black is the standard; any other color is rarer — read the actual \
+ink color carefully (signatures on dark patches are often silver).
 - `memorabilia`: cards may embed REAL material pieces ("relics"): jersey \
-swatches, patches, ball pieces, floor pieces, shoe pieces. There can be MORE \
-THAN ONE piece in a card — analyze each piece separately in `pieces[]`:
+swatches, patches, ball pieces, floor pieces, shoe pieces. Like autographs, \
+be DECISIVE: a visible front with no embedded material means `present: false` \
+with empty `pieces`; null only when you could not see the relevant face. \
+There can be MORE THAN ONE piece in a card — analyze each piece separately \
+in `pieces[]`:
   - `type`: patch (multi-color jersey patch) | jersey (plain swatch) | ball | \
 floor | shoe | other.
   - `is_fabric`: true if it is an actual piece of fabric/material, false if it \

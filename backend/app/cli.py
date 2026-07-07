@@ -14,6 +14,7 @@ from app.config import MODEL_PRICES_PER_MTOK, load_dotenv, resolve_model
 from app.services.enrich import enrich_card
 from app.services.extractor import CardExtractor
 from app.services.images import preprocess_image
+from app.services.normalize import normalize_card
 from app.services.psa import PSAClient
 
 
@@ -57,6 +58,10 @@ def main(argv: list[str] | None = None) -> int:
                   + (f" (updated: {', '.join(outcome.changed_fields)})"
                      if outcome.changed_fields else ""),
                   file=sys.stderr)
+    normalized_card, normalized = normalize_card(result.card)
+    result.card = normalized_card
+    if normalized:
+        print(f"[normalize] canonicalized: {', '.join(normalized)}", file=sys.stderr)
     elapsed = time.perf_counter() - start
 
     payload = json.dumps(result.card.model_dump(mode="json"), indent=2)

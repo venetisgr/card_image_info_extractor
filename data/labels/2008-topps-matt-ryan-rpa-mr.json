@@ -8,7 +8,7 @@
   "year": "2008",
   "brand": "Topps",
   "set": "Topps",
-  "subset": "Rookie Premiere Autographs",
+  "subset": null,
   "card_number": "RPA-MR",
   "team": "Atlanta Falcons",
   "attributes": {
@@ -23,12 +23,12 @@
     "jersey_number_candidates": null
   },
   "autograph": {
-    "present": true,
+    "present": null,
     "ink_color": null
   },
   "memorabilia": {
-    "present": false,
-    "pieces": []
+    "present": null,
+    "pieces": null
   },
   "graded": {
     "grading_company": "BGS",

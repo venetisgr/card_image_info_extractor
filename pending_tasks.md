@@ -58,10 +58,14 @@
 - [x] 🟡 **P1-10** Test on **real card photos** — *done 2026-07-06: 11 cards,
   **~91% strict field accuracy**, all priority fields ~perfect (see
   `eval/results/real_seed/SUMMARY.md`). → completed_tasks.md*
-- [ ] 🟢 **P1-11** Eval follow-ups from real-photo run — *fuzzy-score
-  `label_text`/`description` in compare.py; decide GT convention for facts not
-  visible in the image; prompt nudges (jersey-number candidates when occluded;
-  pictured pro team for lettermen cards).*
+- [x] 🟢 **P1-11** Eval follow-ups — *done 2026-07-06: fuzzy scoring for
+  transcription fields + color equivalences in compare.py; image-visible GT
+  convention documented + 4 labels corrected; prompt v3/v3.1 nudges. Result:
+  **98.6% (278/282), 8/11 cards perfect** — `eval/results/real_seed_v2/SUMMARY.md`.
+  → completed_tasks.md*
+- [ ] 🟢 **P1-12** Variance tail — *consider self-consistency (second pass /
+  dual-model vote) on low-confidence fields; strongest fix is live PSA
+  verification (token pending).*
 
 ## Phase 2 — Enrichment & verification
 - [x] 🔴 **P2-1** PSA **public API** client — *done: bearer-token client with
@@ -79,7 +83,10 @@
   user (2026-07-06) — REMIND USER LATER before starting.*
 - [ ] ⏸️ **P2-5** Raw fuzzy-match + fill — *ON HOLD per user (2026-07-06),
   together with P2-4 — REMIND USER LATER.*
-- [ ] 🟡 **P2-6** Brand/set **normalization tables** — *aliases canonicalized.*
+- [x] 🟡 **P2-6** Brand/set **normalization tables** — *done 2026-07-06:
+  `services/normalize.py` (brand/set/subset/team aliases + language-qualifier
+  extraction), wired post-enrichment in API + CLI; Android reference aligned.
+  → completed_tasks.md*
 
 ## Phase 3 — On-device baseline (Android)
 - [x] 🔴 **P3-1** Android project + capture (front/back) + gallery — *done via the

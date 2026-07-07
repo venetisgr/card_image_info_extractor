@@ -1,0 +1,88 @@
+{
+  "card_type": "raw",
+  "sport": "football",
+  "player_name": "Adrian Peterson",
+  "year": "2007",
+  "brand": "Donruss",
+  "set": "Donruss Threads",
+  "subset": "College Gridiron Kings",
+  "parallel": null,
+  "card_number": "CGK-11",
+  "team": "Oklahoma Sooners",
+  "language": "en",
+  "attributes": {
+    "rookie": true,
+    "serial_number": "16",
+    "serial_limit": "25",
+    "serial_matches_jersey_number": false
+  },
+  "photo": {
+    "jersey_colors": [
+      "red",
+      "white"
+    ],
+    "jersey_number": "28",
+    "jersey_number_candidates": null
+  },
+  "autograph": {
+    "present": true,
+    "ink_color": "black"
+  },
+  "memorabilia": {
+    "present": true,
+    "pieces": [
+      {
+        "type": "jersey",
+        "is_fabric": true,
+        "colors": [
+          "red"
+        ],
+        "unique_color_count": 1,
+        "contains_team_logo_part": false,
+        "contains_player_name_part": false,
+        "contains_team_name_part": false,
+        "letters_visible": null
+      },
+      {
+        "type": "jersey",
+        "is_fabric": true,
+        "colors": [
+          "red"
+        ],
+        "unique_color_count": 1,
+        "contains_team_logo_part": false,
+        "contains_player_name_part": false,
+        "contains_team_name_part": false,
+        "letters_visible": null
+      }
+    ]
+  },
+  "graded": null,
+  "per_field_confidence": {
+    "player_name": 0.99,
+    "year": 0.98,
+    "brand": 0.95,
+    "set": 0.9,
+    "subset": 0.97,
+    "card_number": 0.98,
+    "team": 0.97,
+    "attributes.serial_number": 0.85,
+    "attributes.serial_limit": 0.9,
+    "attributes.rookie": 0.85,
+    "photo.jersey_number": 0.9,
+    "autograph.present": 0.98,
+    "autograph.ink_color": 0.95,
+    "memorabilia.present": 0.98,
+    "memorabilia.pieces": 0.9
+  },
+  "provenance": {
+    "engine": "claude",
+    "model_version": "claude-opus-4-8",
+    "timestamp": "2026-07-07T00:40:28.997662Z",
+    "source_images": [
+      "sha256:51d95e34e88ed555d57b8d60e2b71a0e55f9a46e5b6e757685543722c85e8164",
+      "sha256:b4ad3c7950a878dc2ab8a9ad4c9232efec07149bf5694f1a0979dd57298e4fa7"
+    ]
+  },
+  "raw_output": null
+}

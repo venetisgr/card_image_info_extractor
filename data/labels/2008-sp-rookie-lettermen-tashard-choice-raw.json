@@ -15,18 +15,15 @@
     "rookie": true,
     "serial_number": "4",
     "serial_limit": "4",
-    "serial_matches_jersey_number": false
+    "serial_matches_jersey_number": null
   },
   "photo": {
     "jersey_colors": [
       "white",
       "navy"
     ],
-    "jersey_number": "23",
-    "jersey_number_candidates": [
-      "23",
-      "28"
-    ]
+    "jersey_number": null,
+    "jersey_number_candidates": null
   },
   "autograph": {
     "present": true,
