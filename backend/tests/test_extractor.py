@@ -106,7 +106,9 @@ def test_system_prompt_is_static_and_covers_hints():
 def test_happy_path_assembles_cardinfo_with_provenance():
     payload = _extraction_payload()
     client = FakeClient([_tool_response(payload)])
-    result = CardExtractor(client=client).extract(_image(b"f"), _image(b"b"), model="test-model")
+    result = CardExtractor(client=client).extract(
+        _image(b"f"), _image(b"b"), model="test-model", verify=False
+    )
 
     assert result.card.card_type.value == "graded"
     assert result.card.player_name == "LeBron James"
@@ -126,7 +128,9 @@ def test_happy_path_assembles_cardinfo_with_provenance():
 
 def test_front_only_supported():
     client = FakeClient([_tool_response(_extraction_payload())])
-    result = CardExtractor(client=client).extract(_image(b"f"), None, model="test-model")
+    result = CardExtractor(client=client).extract(
+        _image(b"f"), None, model="test-model", verify=False
+    )
     assert len(result.card.provenance.source_images) == 1
 
 
@@ -134,13 +138,13 @@ def test_invalid_payload_triggers_one_corrective_retry():
     bad = _extraction_payload()
     bad["card_type"] = "slabbed"  # not in the enum
     client = FakeClient([_tool_response(bad), _tool_response(_extraction_payload())])
-    result = CardExtractor(client=client).extract(_image(), model="test-model")
+    result = CardExtractor(client=client).extract(_image(), model="test-model", verify=False)
 
     assert result.usage.attempts == 2
     # corrective turn carries the errored tool_result back to the model
     retry_messages = client.calls[1]["messages"]
-    assert retry_messages[-1]["content"][0]["type"] == "tool_result"
-    assert retry_messages[-1]["content"][0]["is_error"] is True
+    assert retry_messages[2]["content"][0]["type"] == "tool_result"
+    assert retry_messages[2]["content"][0]["is_error"] is True
     assert result.card.card_type.value == "graded"
 
 
@@ -149,16 +153,68 @@ def test_still_invalid_after_retry_raises():
     bad["card_type"] = "slabbed"
     client = FakeClient([_tool_response(bad), _tool_response(bad)])
     with pytest.raises(ExtractionError):
-        CardExtractor(client=client).extract(_image(), model="test-model")
+        CardExtractor(client=client).extract(_image(), model="test-model", verify=False)
 
 
 def test_graded_without_graded_block_is_rejected_then_corrected():
     bad = _extraction_payload()
     del bad["graded"]  # violates the if/then rule for graded cards
     client = FakeClient([_tool_response(bad), _tool_response(_extraction_payload())])
-    result = CardExtractor(client=client).extract(_image(), model="test-model")
+    result = CardExtractor(client=client).extract(_image(), model="test-model", verify=False)
     assert result.usage.attempts == 2
     assert result.card.graded is not None
+
+
+# ---- self-verification pass (P1-12) ---------------------------------------
+
+
+def test_verify_pass_merges_only_flagged_fields():
+    first = _extraction_payload()
+    first["card_number"] = "RPB-MR"  # transcription-critical -> always re-checked
+    second = _extraction_payload()
+    second["card_number"] = "RPA-MR"  # corrected on the second look
+    second["player_name"] = "Wrong Person"  # unflagged (conf 0.99) -> must NOT merge
+    client = FakeClient([_tool_response(first), _tool_response(second)])
+
+    result = CardExtractor(client=client).extract(_image(), model="test-model", verify=True)
+
+    assert result.usage.attempts == 2
+    assert result.card.card_number == "RPA-MR"
+    assert result.card.player_name == "LeBron James"  # first reading kept
+    assert "card_number" in result.verified_fields
+    # verification turn carries the current readings back as a tool_result
+    verify_turn = client.calls[1]["messages"][2]
+    assert verify_turn["content"][0]["type"] == "tool_result"
+    assert "RE-EXAMINE" in verify_turn["content"][0]["content"]
+
+
+def test_verify_pass_skipped_when_everything_is_confident():
+    payload = _extraction_payload()
+    # No critical strings present and all confidences >= threshold.
+    payload["card_number"] = None
+    payload["attributes"]["serial_number"] = None
+    payload["attributes"]["serial_limit"] = None
+    payload["graded"]["cert_number"] = None
+    payload["per_field_confidence"] = {"player_name": 0.99, "graded.grade": 1.0}
+    client = FakeClient([_tool_response(payload)])
+
+    result = CardExtractor(client=client).extract(_image(), model="test-model", verify=True)
+
+    assert result.usage.attempts == 1
+    assert result.verified_fields == []
+
+
+def test_verify_pass_falls_back_to_first_reading_on_bad_second_output():
+    first = _extraction_payload()
+    bad_second = _extraction_payload()
+    bad_second["card_type"] = "slabbed"  # invalid -> verification discarded
+    client = FakeClient([_tool_response(first), _tool_response(bad_second)])
+
+    result = CardExtractor(client=client).extract(_image(), model="test-model", verify=True)
+
+    assert result.usage.attempts == 2
+    assert result.verified_fields == []
+    assert result.card.card_number == first["card_number"]
 
 
 def test_no_tool_use_block_raises():

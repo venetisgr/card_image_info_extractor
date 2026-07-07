@@ -1,0 +1,70 @@
+{
+  "card_type": "graded",
+  "sport": "basketball",
+  "player_name": "Michael Jordan",
+  "year": "1996",
+  "brand": "Upper Deck",
+  "set": "Collector's Choice International",
+  "subset": "Jordan's Journal",
+  "parallel": null,
+  "card_number": "J3",
+  "team": "Chicago Bulls",
+  "language": "es",
+  "attributes": {
+    "rookie": false,
+    "serial_number": null,
+    "serial_limit": null,
+    "serial_matches_jersey_number": null
+  },
+  "photo": {
+    "jersey_colors": [
+      "red",
+      "black"
+    ],
+    "jersey_number": null,
+    "jersey_number_candidates": null
+  },
+  "autograph": {
+    "present": false,
+    "ink_color": null
+  },
+  "memorabilia": {
+    "present": false,
+    "pieces": []
+  },
+  "graded": {
+    "grading_company": "PSA",
+    "grade": 5.0,
+    "grade_label": "EX 5",
+    "description": "1996 COLL. CHOICE INT'L MICHAEL JORDAN SPANISH JORDAN'S JOURNAL #J3",
+    "subgrades": null,
+    "autograph_grade": null,
+    "cert_number": "111281730",
+    "label_text": "1996 COLL. CHOICE INT'L MICHAEL JORDAN SPANISH JORDAN'S JOURNAL #J3 EX 5 111281730"
+  },
+  "per_field_confidence": {
+    "player_name": 0.99,
+    "year": 0.97,
+    "brand": 0.9,
+    "set": 0.9,
+    "subset": 0.95,
+    "card_number": 0.95,
+    "team": 0.95,
+    "language": 0.9,
+    "graded.grade": 0.99,
+    "graded.grade_label": 0.98,
+    "graded.cert_number": 0.96,
+    "graded.grading_company": 0.99,
+    "autograph.present": 0.9,
+    "memorabilia.present": 0.9
+  },
+  "provenance": {
+    "engine": "claude",
+    "model_version": "claude-opus-4-8",
+    "timestamp": "2026-07-07T02:51:15.716512Z",
+    "source_images": [
+      "sha256:bb726b5efedc8086ac2214ee9f3804990ae0da36d4b352520ae8298982f67751"
+    ]
+  },
+  "raw_output": null
+}

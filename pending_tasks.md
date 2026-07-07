@@ -36,7 +36,9 @@
 - [ ] 🟡 **P0-5** Labeling guidelines + label format aligned to `CardInfo` — *a
   labeler can produce ground-truth JSON unambiguously.*
 - [ ] 🟡 **P0-6** Label the seed dataset — *ground-truth JSON for every seed image.*
-- [ ] 🟢 **P0-7** CI (GitHub Actions): lint + test for backend & android — *CI green.*
+- [x] 🟢 **P0-7** CI (GitHub Actions) — *done 2026-07-06: backend pytest (60) +
+  android `:core` tests on every push (`.github/workflows/ci.yml`); no secrets
+  needed. → completed_tasks.md*
 - [ ] 🔴 **P0-8** Secrets strategy doc (server-side only; no keys in app) — *written
   and referenced in `resources.md`.*
 
@@ -63,9 +65,10 @@
   convention documented + 4 labels corrected; prompt v3/v3.1 nudges. Result:
   **98.6% (278/282), 8/11 cards perfect** — `eval/results/real_seed_v2/SUMMARY.md`.
   → completed_tasks.md*
-- [ ] 🟢 **P1-12** Variance tail — *consider self-consistency (second pass /
-  dual-model vote) on low-confidence fields; strongest fix is live PSA
-  verification (token pending).*
+- [x] 🟢 **P1-12** Self-verification pass — *done 2026-07-06: second targeted
+  look at low-confidence + critical fields, selective merge w/ confidence
+  guard, default on (`--no-verify` opt-out). Fixed the RPA-MR class; 9/11 cards
+  perfect; ~2x cost when triggered. → completed_tasks.md*
 
 ## Phase 2 — Enrichment & verification
 - [x] 🔴 **P2-1** PSA **public API** client — *done: bearer-token client with

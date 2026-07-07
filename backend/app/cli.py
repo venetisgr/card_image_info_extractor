@@ -40,6 +40,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--no-enrich", action="store_true", help="skip PSA cert verification for graded PSA cards"
     )
+    parser.add_argument(
+        "--no-verify", action="store_true",
+        help="skip the second-look pass on low-confidence/critical fields",
+    )
     args = parser.parse_args(argv)
 
     load_dotenv()
@@ -49,7 +53,9 @@ def main(argv: list[str] | None = None) -> int:
 
     extractor = CardExtractor()
     start = time.perf_counter()
-    result = extractor.extract(front, back, model=model)
+    result = extractor.extract(front, back, model=model, verify=not args.no_verify)
+    if result.verified_fields:
+        print(f"[verify] re-examined: {', '.join(result.verified_fields)}", file=sys.stderr)
     if not args.no_enrich:
         card, outcome = enrich_card(result.card, PSAClient())
         result.card = card

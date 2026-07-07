@@ -65,6 +65,7 @@ async def extract(
     back: UploadFile | None = File(None, description="Photo of the card back (optional)"),
     model: str | None = Form(None, description="Model tier alias (opus/sonnet/haiku) or model id"),
     enrich: bool = Form(True, description="Verify graded PSA cards via the PSA public API"),
+    verify: bool = Form(True, description="Second-look pass on low-confidence/critical fields"),
     extractor: CardExtractor = Depends(get_extractor),
     psa_client: PSAClient = Depends(get_psa_client),
 ) -> JSONResponse:
@@ -73,7 +74,7 @@ async def extract(
     model_id = resolve_model(model)
 
     try:
-        result = extractor.extract(front_img, back_img, model=model_id)
+        result = extractor.extract(front_img, back_img, model=model_id, verify=verify)
     except anthropic.AuthenticationError as exc:
         raise HTTPException(502, f"Claude API authentication failed: {exc.message}") from exc
     except anthropic.RateLimitError as exc:

@@ -36,6 +36,10 @@ MAX_IMAGE_LONG_EDGE = 2576  # Claude vision native-resolution ceiling
 JPEG_QUALITY = 90
 MAX_OUTPUT_TOKENS = 8192
 
+# Self-verification pass (P1-12): fields whose self-reported confidence falls
+# below this get re-examined in a second, targeted turn.
+VERIFY_CONF_THRESHOLD = 0.9
+
 # Indicative $/1M-token prices for the CLI cost readout (input, output).
 MODEL_PRICES_PER_MTOK = {
     "claude-opus-4-8": (5.00, 25.00),

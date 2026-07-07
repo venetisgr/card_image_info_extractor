@@ -1,0 +1,103 @@
+{
+  "card_type": "raw",
+  "sport": "football",
+  "player_name": "Adrian Peterson",
+  "year": "2007",
+  "brand": "Donruss",
+  "set": "Gridiron Gear",
+  "subset": "Rookie Gridiron Gems",
+  "parallel": null,
+  "card_number": "216",
+  "team": "Minnesota Vikings",
+  "language": "en",
+  "attributes": {
+    "rookie": true,
+    "serial_number": "40",
+    "serial_limit": "50",
+    "serial_matches_jersey_number": false
+  },
+  "photo": {
+    "jersey_colors": [
+      "purple",
+      "white",
+      "gold"
+    ],
+    "jersey_number": "28",
+    "jersey_number_candidates": null
+  },
+  "autograph": {
+    "present": true,
+    "ink_color": "black"
+  },
+  "memorabilia": {
+    "present": true,
+    "pieces": [
+      {
+        "type": "jersey",
+        "is_fabric": true,
+        "colors": [
+          "purple"
+        ],
+        "unique_color_count": 1,
+        "contains_team_logo_part": false,
+        "contains_player_name_part": false,
+        "contains_team_name_part": false,
+        "letters_visible": null
+      },
+      {
+        "type": "ball",
+        "is_fabric": true,
+        "colors": [
+          "brown"
+        ],
+        "unique_color_count": 1,
+        "contains_team_logo_part": false,
+        "contains_player_name_part": false,
+        "contains_team_name_part": false,
+        "letters_visible": null
+      },
+      {
+        "type": "jersey",
+        "is_fabric": true,
+        "colors": [
+          "white"
+        ],
+        "unique_color_count": 1,
+        "contains_team_logo_part": false,
+        "contains_player_name_part": false,
+        "contains_team_name_part": false,
+        "letters_visible": null
+      }
+    ]
+  },
+  "graded": null,
+  "per_field_confidence": {
+    "player_name": 0.99,
+    "sport": 0.99,
+    "year": 0.97,
+    "brand": 0.96,
+    "set": 0.9,
+    "subset": 0.95,
+    "card_number": 0.97,
+    "team": 0.98,
+    "attributes.serial_number": 0.95,
+    "attributes.serial_limit": 0.95,
+    "attributes.rookie": 0.98,
+    "photo.jersey_number": 0.95,
+    "photo.jersey_colors": 0.9,
+    "autograph.present": 0.98,
+    "autograph.ink_color": 0.95,
+    "memorabilia.present": 0.98,
+    "memorabilia.pieces": 0.9
+  },
+  "provenance": {
+    "engine": "claude",
+    "model_version": "claude-opus-4-8",
+    "timestamp": "2026-07-07T02:53:17.940077Z",
+    "source_images": [
+      "sha256:6257d9a57246c16803c3c44d98f24d2b00010a60daadfd3213bf4b1120a949e1",
+      "sha256:efa73fd2df8fac21d712cc113c881d4effb1f8877312e4b601087e77bd2a2035"
+    ]
+  },
+  "raw_output": null
+}

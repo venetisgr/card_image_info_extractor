@@ -27,8 +27,9 @@ class StubExtractor:
             (REPO / "shared/examples/graded_relic_example.json").read_text()
         )
 
-    def extract(self, front, back=None, model="m"):
+    def extract(self, front, back=None, model="m", verify=True):
         self.seen_model = model
+        self.seen_verify = verify
         return ExtractionResult(card=self.card, usage=Usage(model=model, attempts=1))
 
 
